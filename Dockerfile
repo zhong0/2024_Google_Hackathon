@@ -11,3 +11,5 @@ COPY ./app/requirement.txt /app/requirement.txt
 RUN pip install -q -U google-generativeai
 
 RUN pip install -r /app/requirement.txt
+
+EXPOSE 8000
