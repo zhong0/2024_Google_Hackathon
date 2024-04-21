@@ -6,7 +6,7 @@ body {
 /** 底圖 **/
 .image-container {
     position: relative;
-    width: 100vw; /* 图片宽度占据整个视口宽度 */
+    width: 100vw;
 }
 
 .image-container::before {
@@ -16,30 +16,30 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.5); /* 透明度为50%的白色背景 */
-    z-index: 1; /* 确保遮罩在图片之上 */
+    background-color: rgba(255, 255, 255, 0.5); 
+    z-index: 1;
 }
 
 .image-container img {
     display: block;
     width: 100%;
     height: auto;
-    z-index: 2; /* 图片叠在遮罩之上 */
+    z-index: 2;
 }
 
 .rounded-rectangle {
     position: absolute;
-    top: 250px; /* 距离顶部80px */
+    top: 250px;
     left: 0;
     width: 100%;
-    height: 100vh; /* 高度为视口高度减去80px */
-    background-color: #FFFFFF; /* 设置背景颜色 */
-    border-top-left-radius: 50px; /* 左上角弧度为50px */
-    border-top-right-radius: 50px; /* 右上角弧度为50px */
-    z-index: 3; /* 图片叠在遮罩之上 */
+    height: 100vh;
+    background-color: #FFFFFF;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    z-index: 3;
 }
 /** 文字 **/
-.hello-text {
+.text-hello {
     z-index: 3;
     position: absolute;
     top: 100px;
@@ -48,12 +48,54 @@ body {
     font-family: 'Times New Roman', Times, serif;
 }
 
+.text-piece {
+    position: absolute;
+    justify-content: left;
+    width: 90%;
+    z-index: 3;
+    top: 77%;
+    left: 8%;
+    z-index: 4;
+}
+
+.text-fittingroom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+    position: absolute;
+    top: 120px;
+    z-index: 4;
+}
+
+.text-explore {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+    position: absolute;
+    top:270px;
+    z-index: 4;
+}
+
+.text-style {
+    position: absolute;
+    justify-content: left;
+    width: 90%;
+    z-index: 3;
+    left: 8%;
+    z-index: 4;
+}
+
 /** 按鈕 **/
+
 .fitting-button {
     z-index: 3;
     position: absolute;
     top: 180px;
     left: 6%;
+    border: none;
+    background: none;
 }
 
 .selfclothes-button {
@@ -63,7 +105,6 @@ body {
     right: 18%;
 }
 
-
 .upload-button {
     z-index: 3;
     position: absolute;
@@ -71,27 +112,23 @@ body {
     right: 6%;
 }
 
-.text-explore {
-    display: flex;
-    justify-content: center; /* 水平居中 */
-    width: 100%;
+.add-button {
     z-index: 3;
     position: absolute;
-    top:270px;
-    z-index: 4; /* 图片叠在遮罩之上 */
+    right: 10%;
+    border: none;
+    background: none;
 }
-
 
 .explore-button-container {
-    position: absolute; /* 绝对定位 */
-    top: 56%; /* 垂直居中 */
-    left: 50%; /* 水平居中 */
-    transform: translate(-50%, -50%); /* 使用负边距进行居中 */
+    position: absolute; 
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
     height: auto;
-    z-index: 4; /* 图片叠在遮罩之上 */
+    z-index: 4;
 }
-
 
 .explore-button-container::before {
     content: '';
@@ -100,54 +137,106 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 透明度为50%的白色背景 */
-    z-index: 3; /* 确保遮罩在图片之上 */
-    border-radius: 20px; /* 设置圆弧角的半径 */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    border-radius: 20px;
 }
 
 .explore-button-container-bkg {
     display: block;
     width: 100%;
     height: auto;
-    z-index: 4; /* 图片叠在遮罩之上 */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8); /* 添加阴影效果 */
-    border-radius: 20px; /* 设置圆弧角的半径 */
+    z-index: 4;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
 }
 
 .overlay-image {
     position: absolute;
     width: 100px;
     height: auto;
-    top: 50%; /* 垂直居中 */
-    left: 50%; /* 水平居中 */
-    transform: translate(-50%, -50%); /* 使用负边距进行居中 */
-    z-index: 4; /* 使叠加图片处于上层 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
 }
 
-.text-piece {
-    position: absolute;
-    justify-content: left; /* 水平居中 */
-    width: 90%;
+.next-button {
     z-index: 3;
-    top: 77%;
-    left: 8%;
-    z-index: 4; /* 图片叠在遮罩之上 */
+    position: absolute;
+    top: 270px;
+    right: 6%;
+    border: none;
+    background: none;
 }
 
+
+/* 照片兩排 */
 .grid-container {
     top:82%;
     display: grid;
     position: absolute;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自适应列宽 */
-    gap: 5px; /* 图片之间的间距 */
-    justify-items: center; /* 水平居中 */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 6px;
+    justify-items: center;
     z-index: 4;
     left: 8%;
     right: 8%;
 }
 
 .grid-image {
-    width: 100%; /* 图片宽度填满列 */
-    height: auto; /* 高度自适应，保持原始宽高比例 */
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
+    width: 100%; 
+    height: auto;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 文字input */
+.input-text {
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    padding: 8px; 
+    width: 300px;
+    height: 40px;
+    left: 8%;
+    z-index: 4;
+    font-size: 14pt;
+}
+
+
+/* toggle button */
+.toggle-container {
+    position: absolute;
+    left: 8%;
+    display: flex;
+    flex-wrap: wrap; /* 換行 */
+    gap: 10px;
+    width: 360px;
+    max-height: 140px;
+    padding: 10px;
+    border: 1px solid #000000; 
+    border-radius: 10px;
+    z-index: 4;
+    justify-content: center;
+    overflow-y: auto;
+    flex-direction: row;
+}
+
+/* toggle switch style */
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-container label {
+    cursor: pointer;
+    background-color: #ccc;
+    padding: 8px;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+    height: 20px;
+}
+
+.toggle-container input[type="checkbox"]:checked + label {
+    background-color: #0F4C3A; 
+    color: white; 
 }

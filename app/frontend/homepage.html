@@ -13,17 +13,18 @@
     </div>
     <div class="rounded-rectangle"></div>
 
-    <p class="hello-text">Hi, {{name}},</p>
+    <p class="text-hello">Hi, {{name}},</p>
 
     <!-- buttons -->
     <div class="fitting-button">
-        <img style = " max-width: 200px; height: auto;" src="../resource/fitting_bt.png" alt="fitting">
+        <input type="image" id="fitting-bt" style="width: 200px; height: auto;" src="../resource/fitting_bt.png" alt="fitting-button">
     </div>
+    
     <div class="selfclothes-button">
-        <img style = " max-width: 50px; height: auto;" src="../resource/clothes_bt.png" alt="wardrobe">
+        <img id = "selfclothes-bt" style = " max-width: 50px; height: auto;" src="../resource/clothes_bt.png" alt="wardrobe">
     </div>
     <div class="upload-button">
-        <img style = " max-width: 50px; height: auto;" src="../resource/upload_btn.png" alt="upload">
+        <img id = "upload-bt" style = " max-width: 50px; height: auto;" src="../resource/upload_btn.png" alt="upload">
     </div>
 
     <!-- explore -->
@@ -43,8 +44,8 @@
         <img class="grid-image" src="../upload/zhong0/01.jpg" alt="Image 1">
         <img class="grid-image" src="../upload/zhong0/02.jpg" alt="Image 2">
         <img class="grid-image" src="../upload/zhong0/03.jpg" alt="Image 3">
-    
     </div>
 
+    <script src="../frontend/homepage.js"></script>
 </body>
 </html>
