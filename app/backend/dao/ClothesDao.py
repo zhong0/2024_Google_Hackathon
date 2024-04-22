@@ -22,6 +22,7 @@ class ClothesDao:
                 "filename": "$clothes.filename"
             }}
         ]
+
         return str(list(self.collection.aggregate(pipeline)))
 
     def get_all_distinct_style(self, username):
@@ -34,23 +35,8 @@ class ClothesDao:
             {"$project": {"style": "$_id", "_id": 0}}  
         ]
         results = list(self.collection.aggregate(pipeline))
-        return [result['style'] for result in results]  
 
-    def get_all_distinct_occasion(self, username):
-        pipeline = [
-            {"$match": {"username": username}},
-            {"$unwind": "$clothes"},
-            {"$project": {"occasion": {"$split": ["$clothes.occasion", ", "]}}},
-            {"$unwind": "$occasion"},
-            {"$project": {"occasion": {"$toLower": "$occasion"}}},
-            {"$group": {"_id": None, "distinct_occasions": {"$addToSet": "$occasion"}}},
-            {"$project": {"_id": 0, "distinct_occasions": 1}}
-        ]
-        results = list(self.collection.aggregate(pipeline))
-        if results:
-            return results[0]['distinct_occasions']
-        else:
-            return []
+        return [result['style'] for result in results]  
 
     def get_all_distinct_occasion(self, username):
         pipeline = [
@@ -72,6 +58,7 @@ class ClothesDao:
             {"$project": {"_id": 0, "distinct_occasions": 1}}
         ]
         results = list(self.collection.aggregate(pipeline))
+
         if results:
             return results[0]['distinct_occasions']
         else:
@@ -83,6 +70,7 @@ class ClothesDao:
             "username": username,
             "clothes.filename": {"$ne": None}
         }
+        
         return self.collection.distinct("clothes.filename",  pipeline)
     
     def get_filename_by_category(self, username, category):
@@ -91,6 +79,7 @@ class ClothesDao:
             "clothes.category": category,
             "clothes.filename": {"$nin": [None, ""]}
         }
+
         return self.collection.distinct("clothes.filename", pipeline)
         
     def get_style_by_filename(self, username, filename):
@@ -100,6 +89,7 @@ class ClothesDao:
             {"username": username},
             {"$project": {"style": "$clothes.detail.style"}}
         ]
+        
         return list(self.collection.aggregate(pipeline))
 
     def __del__(self):
