@@ -101,6 +101,16 @@ class ClothesDao:
             {"$project": {"style": "$clothes.detail.style"}}
         ]
         return list(self.collection.aggregate(pipeline))
+    
+    def insert_clothes_2_username(self, username, clothes_data):
+        #check if 1st time upload clothes
+        clothes_data_ = self.collection.find({"username":username})
+        if len(list(clothes_data_)) == 0:
+            clothes_data_ = {"username":username, "favorite_set":[], "clothes":clothes_data}
+            result =  self.collection.insert_one(clothes_data_)
+        else:
+            result =  self.collection.update_one({"username":username}, { "$push": {"clothes": { "$each": clothes_data}}})
+        return result.acknowledged
 
     def __del__(self):
         self.client.close()
