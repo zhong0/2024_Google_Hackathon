@@ -203,16 +203,15 @@ body {
     font-size: 14pt;
 }
 
-
 /* toggle button */
 .toggle-container {
     position: absolute;
     left: 8%;
     display: flex;
     flex-wrap: wrap; /* 換行 */
-    gap: 10px;
+    gap: 8px;
     width: 360px;
-    max-height: 140px;
+    height: 125px;
     padding: 10px;
     border: 1px solid #000000; 
     border-radius: 10px;
@@ -220,6 +219,7 @@ body {
     justify-content: center;
     overflow-y: auto;
     flex-direction: row;
+    align-content: start;
 }
 
 /* toggle switch style */
@@ -234,6 +234,7 @@ body {
     border-radius: 50px;
     transition: background-color 0.3s;
     height: 20px;
+    margin: 0;
 }
 
 .toggle-container input[type="checkbox"]:checked + label {
