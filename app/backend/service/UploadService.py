@@ -62,7 +62,7 @@ class UploadService:
 
         #set file name
         for response_js,  filename in zip(img_responses, file_name_list):
-            response_js["filename"] = os.path.join(path, filename)
+            response_js["filename"] = os.path.join(username, filename)
         
         return self.cloth_dao.insert_clothes_2_username(username, img_responses)
 
