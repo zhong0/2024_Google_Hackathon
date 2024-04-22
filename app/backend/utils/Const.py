@@ -2,6 +2,7 @@
 db_name = 'hackathon'
 clothes_collection = 'clothes'
 recommend_collection = 'history_recommend'
+athu_collection = 'authorization'
 uri = "mongodb://35.202.240.250:27017/"
 username = 'test'
 password = '1qaz2wsx'
