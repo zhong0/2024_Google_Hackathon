@@ -1,6 +1,7 @@
-from dao.AthuDao import AthuDao
+from dao.AuthDao import AthuDao
 import utils.Const as const
 import bcrypt
+import re
 
 class AuthService:
     def __init__(self):
@@ -20,3 +21,19 @@ class AuthService:
                 return True
             
         return False
+    
+    # 用戶名長度至少5個字符
+    def is_validate_username(username: str) -> bool:
+        
+        return len(username) >= 5
+
+    # 密碼至少8個字符且包含至少一個數字和一個字母
+    def is_validate_password(password: str) -> bool:
+        if len(password) < 8:
+            return False
+        if not re.search("[a-zA-Z]", password):
+            return False
+        if not re.search("[0-9]", password):
+            return False
+        
+        return True

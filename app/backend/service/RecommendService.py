@@ -1,7 +1,8 @@
 from dao.RecommendHistoryDao import RecommendHistoryDao
 from dao.ClothesDao import ClothesDao
+from dao.ShopDao import ShopDao
 
-from utils.QueryBuilder import build_recommend_query
+from utils.QueryBuilder import build_recommend_query, build_explore_query, build_specific_clothes_explore_query
 from utils.GeminiService import GeminiService
 
 import utils.Const as const
@@ -11,9 +12,10 @@ class RecommendService:
     def __init__(self):
         self.recommend_history_dao = RecommendHistoryDao(const.uri, const.username, const.password, const.db_name, const.recommend_collection)
         self.clothes_dao = ClothesDao(const.uri, const.username, const.password, const.db_name, const.clothes_collection)
+        self.shop_dao = ShopDao(const.uri, const.username, const.password, const.db_name, const.shop_collection)
         self.gemini_service = GeminiService(const.API_key, const.model)
     
-    def recommend_from_wardrobe(self, username, style, occasion, specific_clothes, isRefresh) :
+    def recommend_from_wardrobe(self, username, style, occasion, specific_clothes, isRefresh):
         # get all clothes
         clothes = self.clothes_dao.get_all_clothes_info(username)   
 
@@ -41,6 +43,62 @@ class RecommendService:
 
         # send result (recommend_set, discription)
         return recommend_result 
+    
+    def explore_outfit(self, username, style, shop_list, recommend_count):
+        # get user clothes from wardrobe
+        user_clothes = self.clothes_dao.get_all_clothes_info(username)
+
+        # if selected_style is empty ， get style list from user's wardrobe
+        if style is None :
+            style = self.clothes_dao.get_all_distinct_style(username)
+
+        # get clothes info from shop which fitting the style
+        if shop_list is None:
+            shop_list = self.shop_dao.get_all_shop()
+            
+        shop_clothes = self.shop_dao.get_all_clothes_info_by_shop_list(shop_list, style)   
+
+        # build query
+        query = build_explore_query(user_clothes, shop_clothes, style, recommend_count)
+        print("--------------------------")
+        print("query: " , query)
+
+        # send request to gemini
+        response = self.gemini_service.recommend_by_text(query)
+
+        # parse response to json formatt
+        recommend_result = self.parse_response_to_json(response)
+
+        # send result (recommend_set, discription, style)
+        return recommend_result
+    
+    def explore_outfit_by_specific_clothes(self, username, style, shop_list, specific_clothes, recommend_count):
+        # get user clothes from wardrobe
+        user_clothes = self.clothes_dao.get_all_clothes_info(username)
+
+        # get clothes info from shop which fitting the style
+        if shop_list is None:
+            shop_list = self.shop_dao.get_all_shop()
+
+        shop_clothes = self.shop_dao.get_all_clothes_info_by_shop_list(shop_list, style)
+
+        # if selected_style is empty ， get style list from user's wardrobe
+        if style is None :
+            style = self.clothes_dao.get_all_distinct_style(username)
+
+        # build query
+        query = build_specific_clothes_explore_query(user_clothes, shop_clothes, style, specific_clothes, recommend_count)
+        print("--------------------------")
+        print("query: " , query)
+
+        # send request to gemini
+        response = self.gemini_service.recommend_by_text(query)
+
+        # parse response to json formatt
+        recommend_result = self.parse_response_to_json(response)
+
+        # send result (recommend_set, discription, style)
+        return recommend_result
     
     @staticmethod
     def parse_response_to_json(response):
