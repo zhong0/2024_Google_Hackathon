@@ -73,14 +73,31 @@ class ClothesDao:
         
         return self.collection.distinct("clothes.filename",  pipeline)
     
+    def get_all_distinct_category(self, username):
+        pipeline = [
+            {"$match": {"username": username}},
+            {"$unwind": "$clothes"},
+            {"$project": {"category": {"$toLower": "$clothes.category"}}},
+            {"$group": {"_id": None, "distinct_categories": {"$addToSet": "$category"}}},
+            {"$project": {"_id": 0, "distinct_categories": 1}}
+        ]
+        results = list(self.collection.aggregate(pipeline))
+        if results:
+            return results[0]['distinct_categories']
+        else:
+            return []
+    
     def get_filename_by_category(self, username, category):
-        pipeline = {
-            "username": username,
-            "clothes.category": category,
-            "clothes.filename": {"$nin": [None, ""]}
-        }
-
-        return self.collection.distinct("clothes.filename", pipeline)
+        pipeline = [
+            {"$match": {"username": username}}, 
+            {"$unwind": "$clothes"}, 
+            {"$match": {"clothes.category": category, "clothes.filename": {"$nin": [None, ""]}}}, 
+            {"$project": {"filename": "$clothes.filename"}}
+        ]
+        
+        results = self.collection.aggregate(pipeline)
+        filenames = [result['filename'] for result in results if 'filename' in result]
+        return filenames
         
     def get_style_by_filename(self, username, filename):
         pipeline = [
@@ -94,6 +111,7 @@ class ClothesDao:
 
     def create_username(self, username):
         username_data = {"username":username, "favorite_set":[], "clothes":[]}
+
         return self.collection.insert_one(username_data).acknowledged
     
     def insert_clothes_2_username(self, username, clothes_data):
@@ -104,6 +122,7 @@ class ClothesDao:
             result =  self.collection.insert_one(clothes_data_)
         else:
             result =  self.collection.update_one({"username":username}, { "$push": {"clothes": { "$each": clothes_data}}})
+
         return result.acknowledged
     
     def insert_favorite_set(self, username, filename_list):
@@ -118,6 +137,7 @@ class ClothesDao:
             result = self.collection.find_one({"username":username})
             id_offset = len(result.get("favorite_set"))
             result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "favorite_set.clothes_list": filename_list}]}}})
+        
         return result.acknowledged
 
     def __del__(self):
