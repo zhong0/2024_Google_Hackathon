@@ -4,6 +4,7 @@ const addStyle_button = document.getElementById('add-style-bt');
 const addOccasion_button = document.getElementById('add-occasion-bt');
 const addStyle_input = document.getElementById('style-input');
 const addOccasion_input = document.getElementById('occasion-input');
+const nextPage_button = document.getElementById('next-bt');
 
 // from API
 let styleToggle = [
@@ -109,5 +110,17 @@ addOccasion_button.addEventListener('click', () => {
     addOccasion_input.value = '';
 });
 
-
+nextPage_button.addEventListener('click', () => {
+    fetch('/fitting_clothes', { method: 'GET' })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/fitting_clothes';
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
 
