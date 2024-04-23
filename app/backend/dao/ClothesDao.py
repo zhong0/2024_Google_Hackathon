@@ -92,5 +92,33 @@ class ClothesDao:
         
         return list(self.collection.aggregate(pipeline))
 
+    def create_username(self, username):
+        username_data = {"username":username, "favorite_set":[], "clothes":[]}
+        return self.collection.insert_one(username_data).acknowledged
+    
+    def insert_clothes_2_username(self, username, clothes_data):
+        #check if 1st time upload clothes
+        clothes_data_ = self.collection.find({"username":username})
+        if len(list(clothes_data_)) == 0:
+            clothes_data_ = {"username":username, "favorite_set":[], "clothes":clothes_data}
+            result =  self.collection.insert_one(clothes_data_)
+        else:
+            result =  self.collection.update_one({"username":username}, { "$push": {"clothes": { "$each": clothes_data}}})
+        return result.acknowledged
+    
+    def insert_favorite_set(self, username, filename_list):
+        clothes_data_ = self.collection.find({"username":username})
+        if len(list(clothes_data_)) == 0:
+            if self.create_username(username):
+                #clothes_data_ = self.collection.find({"username":username})
+                result = self.collection.update_one({"username":username}, {"$set": {"favorite_set": [{"set_id": 0, "clothes_list": filename_list}]}})
+            else:
+                return {"error":"can't create new username"}
+        else:
+            result = self.collection.find_one({"username":username})
+            id_offset = len(result.get("favorite_set"))
+            result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "favorite_set.clothes_list": filename_list}]}}})
+        return result.acknowledged
+
     def __del__(self):
         self.client.close()
