@@ -18,12 +18,14 @@ class ClothesService:
         return self.dao.get_all_clothes_info(username)
 
     def get_file_path(self, username):
-        filename_list = self.dao.get_all_distinct_filename(username)
-        return filename_list
+        return self.dao.get_all_distinct_filename(username)
     
     def get_file_path_by_category(self, username, category):
-        filename_list = self.dao.get_filename_by_category(username, category)
-        return filename_list
+        return self.dao.get_filename_by_category(username, category)
+    
+    def get_style_by_filename(self, username, filename):
+        return self.dao.get_style_by_filename(username, filename)
+
 
     def insert_favorite_set(self, username, filename_list):
         return self.dao.insert_favorite_set(username, filename_list)

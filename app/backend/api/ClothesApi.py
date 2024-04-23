@@ -29,10 +29,16 @@ def get_all_file_path(username: str = Form(...)):
     return {"file_path": service.get_file_path(username)}
 
 @router.post("/file-path-by-category")
-def get_all_file_path(username: str = Form(...), category: str = Form(...)):
+def get_file_path_by_category(username: str = Form(...), category: str = Form(...)):
     if username is None or category is None:
         raise HTTPException(status_code=400, detail="Username & category is required")
     return {"file_path": service.get_file_path_by_category(username, category)}
+
+@router.post("/style-by-filename")
+def get_style_by_filename(username: str = Form(...), filename: str = Form(...)):
+    if username is None or filename is None:
+        raise HTTPException(status_code=400, detail="Username & filename is required")
+    return {"style": service.get_style_by_filename(username, filename)}
 
 @router.post("/clothes-info", deprecated=True)
 def get_all_clothes_info(username: str = Form(...)):
@@ -40,7 +46,7 @@ def get_all_clothes_info(username: str = Form(...)):
         raise HTTPException(status_code=400, detail="Username is required")
     return {"clothes_info": service.get_all_clothes_info(username)}
 
-@router.post("add-favorite-set")
+@router.post("/add-favorite-set")
 def insert_favorite_set(username: str, filename_list:list[str]):
     if username is None:
         raise HTTPException(status_code=400, detail="Username is required")

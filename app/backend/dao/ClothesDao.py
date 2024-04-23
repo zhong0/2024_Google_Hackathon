@@ -101,13 +101,17 @@ class ClothesDao:
         
     def get_style_by_filename(self, username, filename):
         pipeline = [
-            {"$unwind": "$clothes"},
-            {"$match": {"clothes.filename": filename}},
-            {"username": username},
-            {"$project": {"style": "$clothes.detail.style"}}
+            {"$unwind": "$clothes"},  
+            {"$match": {"clothes.filename": filename, "username": username}}, 
+            {"$unwind": "$clothes.detail.style"},  
+            {"$group": {"_id": None, "distinct_styles": {"$addToSet": "$clothes.detail.style"}}},  
+            {"$project": {"_id": 0, "styles": "$distinct_styles"}} 
         ]
         
-        return list(self.collection.aggregate(pipeline))
+        results = list(self.collection.aggregate(pipeline))
+        if results and 'styles' in results[0]:
+            return results[0]['styles']
+        return []  
 
     def create_username(self, username):
         username_data = {"username":username, "favorite_set":[], "clothes":[]}
