@@ -39,3 +39,11 @@ def get_all_clothes_info(username: str = Form(...)):
     if username is None:
         raise HTTPException(status_code=400, detail="Username is required")
     return {"clothes_info": service.get_all_clothes_info(username)}
+
+@router.post("add-favorite-set")
+def insert_favorite_set(username: str, filename_list:list[str]):
+    if username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+    if filename_list is None:
+        raise HTTPException(status_code=400, detail="Filenames is required")
+    return service.insert_favorite_set(username, filename_list)

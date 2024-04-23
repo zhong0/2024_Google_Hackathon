@@ -24,3 +24,6 @@ class ClothesService:
     def get_file_path_by_category(self, username, category):
         filename_list = self.dao.get_filename_by_category(username, category)
         return filename_list
+
+    def insert_favorite_set(self, username, filename_list):
+        return self.dao.insert_favorite_set(username, filename_list)
