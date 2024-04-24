@@ -28,11 +28,11 @@ def get_all_file_path(username: str = Form(...)):
         raise HTTPException(status_code=400, detail="Username is required")
     return {"file_path": service.get_file_path(username)}
 
-@router.post("/file-path-by-category")
-def get_file_path_by_category(username: str = Form(...), category: str = Form(...)):
-    if username is None or category is None:
-        raise HTTPException(status_code=400, detail="Username & category is required")
-    return {"file_path": service.get_file_path_by_category(username, category)}
+@router.post("/file-path-group-by-category")
+def get_file_path_group_by_category(username: str = Form(...)):
+    if username is None :
+        raise HTTPException(status_code=400, detail="Username is required")
+    return {"file_path": service.get_file_path_group_by_category(username)}
 
 @router.post("/style-by-filename")
 def get_style_by_filename(username: str = Form(...), filename: str = Form(...)):
