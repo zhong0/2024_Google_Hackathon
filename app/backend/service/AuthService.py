@@ -1,11 +1,11 @@
-from dao.AuthDao import AthuDao
+from dao.AuthDao import AuthDao
 import utils.Const as const
 import bcrypt
 import re
 
 class AuthService:
     def __init__(self):
-        self.auth_dao = AthuDao(const.uri, const.username, const.password, const.db_name, const.athu_collection)
+        self.auth_dao = AuthDao(const.uri, const.username, const.password, const.db_name, const.auth_collection)
 
     def register(self, username: str, password: str):
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())

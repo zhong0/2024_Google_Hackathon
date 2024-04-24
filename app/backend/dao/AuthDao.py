@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 
-class AthuDao:
+class AuthDao:
     def __init__(self, uri, username, password, db_name, collection_name):
         self.client = MongoClient(uri, username=username, password=password)
         self.db = self.client[db_name]

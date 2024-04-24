@@ -5,7 +5,7 @@ username = 'test'
 password = '1qaz2wsx'
 clothes_collection = 'clothes'
 recommend_collection = 'history_recommend'
-athu_collection = 'authorization'
+auth_collection = 'authorization'
 shop_collection = 'shop'
 
 # colume name in db
