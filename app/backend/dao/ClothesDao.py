@@ -112,7 +112,32 @@ class ClothesDao:
         if results and 'styles' in results[0]:
             return results[0]['styles']
         return []  
-
+    
+    def get_clothes_info_by_filename(self, username, filename):
+        pipeline = [
+            {"$match": {"username": username}}, 
+            {"$unwind": "$clothes"},  
+            {"$match": {"clothes.filename": filename}},  
+            {"$project": {  
+                "name": "$clothes.name",
+                "uuid": "$clothes.uuid",
+                "category": "$clothes.category",
+                "gender": "$clothes.gender",
+                "warmth": "$clothes.warmth",
+                "details": "$clothes.detail",
+                "description": "$clothes.description",
+                "occasion": "$clothes.occasion",
+                "filename": "$clothes.filename"
+            }}
+        ]
+        
+        result = list(self.collection.aggregate(pipeline))
+        
+        if result:
+            return result[0] 
+        else:
+            return None 
+        
     def create_username(self, username):
         username_data = {"username":username, "favorite_set":[], "clothes":[]}
 
