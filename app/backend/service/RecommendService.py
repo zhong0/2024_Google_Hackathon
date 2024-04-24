@@ -76,11 +76,7 @@ class RecommendService:
 
         # send result (recommend_set, discription, style)
         return recommend_result
-    
-    @staticmethod
-    def is_my_clothes(username, specific_clothes_file_name):
-        # 檢查名稱
-    
+
     @staticmethod
     def parse_response_to_json(response):
         # get first '{' & last '}' position

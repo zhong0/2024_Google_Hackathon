@@ -1,19 +1,30 @@
 from fastapi import APIRouter, HTTPException, Form, status, Query
 from service.RecommendService import RecommendService
-from entity.RecommendRequest import RecommendationRequest
+from entity.RecommendRequest import RecommendRequest
+from entity.ExploreRequest import ExploreRequest
 import json
 
 router = APIRouter()
 service = RecommendService()
 
 @router.post("/recommend-by-text")
-def recommend_by_text(request: RecommendationRequest):
+def recommend_by_text(request: RecommendRequest):
     return service.recommend_from_wardrobe(
         username=request.username,
         style=request.style,
         occasion=request.occasion,
         specific_clothes=request.specific_clothes,
         isRefresh=request.isRefresh)
+
+@router.post("/explore-outfit")
+def recommend_by_text(request: ExploreRequest):
+    return service.explore_outfit(
+        request.username,
+        request.style,
+        [],
+        request.specific_clothes_filename,
+        request.recommend_count
+    )
 
 @router.post("/create", deprecated=True)
 def create_history_recommend(username: str = Form(...), recommend_set: str = Form(...)):
