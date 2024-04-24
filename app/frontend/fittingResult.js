@@ -16,9 +16,9 @@ description_text.textContent = descrption;
 toggleBtn.addEventListener('change', function() {
     console.log(this.checked)
     if (this.checked) {
-        toggleLabel.style.backgroundImage = "url('../resource/liked-bt.png')";
+        toggleLabel.style.backgroundImage = "url('../resource/liked_bt.png')";
       } else {
-        toggleLabel.style.backgroundImage = "url('../resource/like-bt.png')";
+        toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
       }
     });
 

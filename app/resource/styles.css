@@ -27,6 +27,30 @@ body {
     z-index: 2;
 }
 
+/** explore 底圖 **/
+.explore-image-container {
+    position: relative;
+    width: 100vw;
+}
+
+.explore-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    z-index: 1;
+}
+
+.explore-image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 2;
+}
+
 .rounded-rectangle {
     position: absolute;
     top: 250px;
@@ -53,7 +77,7 @@ body {
     justify-content: left;
     width: 90%;
     z-index: 3;
-    top: 77%;
+    top: 650px;
     left: 8%;
     z-index: 4;
 }
@@ -65,6 +89,16 @@ body {
     z-index: 3;
     position: absolute;
     top: 120px;
+    z-index: 4;
+}
+
+.text-explore-title {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+    position: absolute;
+    top: 70px;
     z-index: 4;
 }
 
@@ -82,9 +116,9 @@ body {
     position: absolute;
     justify-content: left;
     width: 90%;
-    z-index: 3;
     left: 8%;
     z-index: 4;
+    
 }
 
 /** 按鈕 **/
@@ -113,6 +147,13 @@ body {
     right: 18%;
 }
 
+.search-button {
+    z-index: 4;
+    position: absolute;
+    top: 135px;
+    right: 110px;
+}
+
 .upload-button {
     z-index: 4;
     position: absolute;
@@ -137,9 +178,9 @@ body {
 
 .explore-button-container {
     position: absolute; 
-    top: 56%;
+    top: 320px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     width: 400px;
     height: auto;
     z-index: 4;
@@ -153,7 +194,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 3;
+    z-index: 4;
     border-radius: 20px;
 }
 
@@ -188,7 +229,7 @@ body {
 
 /* 照片兩排 */
 .grid-container {
-    top:82%;
+    top: 700px;
     display: grid;
     position: absolute;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -216,6 +257,20 @@ body {
     left: 8%;
     z-index: 4;
     font-size: 14pt;
+}
+
+.explore-input {
+    position: absolute;
+    border-radius: 50px;
+    border: 1px solid #000000;
+    padding: 8px; 
+    width: 300px;
+    height: 40px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 4;
+    font-size: 14pt;
+    justify-content: center;
 }
 
 /* toggle button */
@@ -261,7 +316,7 @@ body {
     display: none; /* 隱藏原生的checkbox */
   }
 
-  .like-toggle-label {
+.like-toggle-label {
     position: absolute;
     z-index: 4;
     display: inline-block;
@@ -328,11 +383,77 @@ select {
     display: none; /* 初始隐藏 */
 }
 
-
 .description-text {
     position: absolute;
     top: 610px;
     left: 8%;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px; /* 字體大小 */
+    font-weight: normal; /* 字體粗細 */
+    color: #000; /* 文字顏色 */
+    line-height: 1.5; /* 行高 */
+    text-align: left; /* 文字對齊方式 */
+    text-decoration: none; /* 文字下劃線 */
+    z-index: 4;
+  }
+
+
+/* explore */
+.explore-set-container {
+    position: absolute;
+    top: 320px;
+    left: 8%;
+    width: 450px;
+    /*max-height: 300px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    z-index: 4;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+.explore-set-image-gallery {
+    display: flex; /* Make images display horizontally */
+    overflow-x: auto; /* Enable horizontal scrollbar */
+    scroll-snap-type: x mandatory; /* Enable snapping */
+}
+  
+.explore-set-image-gallery img {
+    flex: 0 0 auto; /* Allow images to shrink or grow */
+    width: 200px; /* Set image width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add some space between images */
+}
+  
+.explore-set-card {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    height: 450px;
+    border: 1px solid #ccc;
+}
+
+
+.explore-set-tag-row {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+  z-index: 4;
+}
+
+.explore-set-tag {
+    background-color: rgba(145, 180, 147, 0.5); 
+  border: 1px solid #646A58;
+  border-radius: 50px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14pt;
+  padding: 8px;
+}
+
+.explore-set-description-text {
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px; /* 字體大小 */
     font-weight: normal; /* 字體粗細 */
