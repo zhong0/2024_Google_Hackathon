@@ -1,0 +1,16 @@
+Here is all the information about the clothing.
+clothes...
+
+Please follow the information provided above and meet the following criteria:
+
+style: []
+occasion: []
+And must include the following garments:
+
+clothes_file_name: []
+And must not be any of the following combinations:
+
+history_commend: []
+Recommend the most suitable outfit.
+Your response should only be in a JSON format string, formatted as follows:
+{"recommend_result": {"recommend_set": ["clothes_file_name_1", "clothes_file_name_2"],"description": "......"}}
