@@ -12,9 +12,8 @@ class ShopDao:
         
         return username_list
     
-    def get_all_clothes_info_by_shop_list(self, shop_list):
+    def get_all_clothes_info(self):
         pipeline = [
-            {"$match": {"shop_name": {"$in": shop_list}}},
             {"$unwind": "$clothes"},
             {"$project": {
                 "name": "$clothes.name",

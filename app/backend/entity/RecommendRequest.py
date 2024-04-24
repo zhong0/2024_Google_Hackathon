@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-class RecommendationRequest(BaseModel):
+class RecommendRequest(BaseModel):
     username: str 
     style: Optional[List[str]] = None
     occasion: Optional[List[str]] = None

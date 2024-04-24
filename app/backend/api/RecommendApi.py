@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Form, status, Query
 from service.RecommendService import RecommendService
 from entity.RecommendRequest import RecommendRequest
 from entity.ExploreRequest import ExploreRequest
+from entity.ExplorePiecesRequest import ExplorePiecesRequest
+import utils.Const as const
 import json
 
 router = APIRouter()
@@ -17,13 +19,20 @@ def recommend_by_text(request: RecommendRequest):
         isRefresh=request.isRefresh)
 
 @router.post("/explore-outfit")
-def recommend_by_text(request: ExploreRequest):
+def explore_outfit(request: ExploreRequest):
     return service.explore_outfit(
         request.username,
         request.style,
-        [],
-        request.specific_clothes_filename,
-        request.recommend_count
+        const.explore_outfit_number
+    )
+
+@router.post("/explore-pieces-recommendation")
+def explore_outfit(request: ExplorePiecesRequest):
+    return service.explore_pieces_recommendation(
+        request.username,
+        request.style,
+        request.specific_clothes,
+        const.explore_outfit_number
     )
 
 @router.post("/create", deprecated=True)

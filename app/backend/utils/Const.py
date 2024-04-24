@@ -18,6 +18,10 @@ detail = 'detail'
 occasion = 'occasion'
 filename = 'filename'
 
+# recommend 
+explore_outfit_number = 1
+explore_pieces_recommendation = 2
+
 # gemini 
 API_key = 'AIzaSyBL5g7dOgNRghzLXA5jVONnVCbSpeprjJ4'
 model = 'gemini-1.5-pro-latest'

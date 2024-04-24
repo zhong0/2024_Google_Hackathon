@@ -35,7 +35,6 @@ class ClothesService:
 
         return category_files
 
-    
     def get_style_by_filename(self, username, filename):
         return self.dao.get_style_by_filename(username, filename)
 
