@@ -20,9 +20,21 @@ class ClothesService:
     def get_file_path(self, username):
         return self.dao.get_all_distinct_filename(username)
     
-    def get_file_path_by_category(self, username, category):
-        return self.dao.get_filename_by_category(username, category)
-    
+    def get_file_path_group_by_category(self, username):
+        category_files = {}
+
+        categories = self.dao.get_all_distinct_category(username)
+
+        for c in categories:
+            filenames = self.dao.get_filename_by_category(username, c)
+            
+            if c in category_files:
+                category_files[c].extend(filenames)  
+            else:
+                category_files[c] = filenames  
+
+        return category_files
+
     def get_style_by_filename(self, username, filename):
         return self.dao.get_style_by_filename(username, filename)
 
