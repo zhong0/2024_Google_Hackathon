@@ -482,6 +482,22 @@ select {
     height: 250px;
 }
 
+.hovered {
+    position: relative;
+    z-index: 5;
+}
+
+.hovered::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+    background-color: rgba(0, 0, 0, 0.5); /* 這裡的 0.5 表示透明度為 50% 的黑色 */
+    pointer-events: none; /* 這樣可以讓鼠標事件穿過覆蓋層，以便點擊到圖片 */
+    z-index: 5;
+}
 
 .explore-piece-image-gallery {
     position: absolute;
@@ -501,6 +517,7 @@ select {
     margin-right: 5px; /* Add some space between images */
     height: 250px;
 }
+
 
 .image-wrapper {
     position: relative;
@@ -529,3 +546,80 @@ select {
   .pin-toggle-btn:checked + .pin-toggle-label {
     background-image: url('./pin_on_toggle.png');
   }
+
+.piece-info-container {
+    position: absolute;
+    top:270px;
+    width: fit-content; /* 讓容器寬度根據內容自適應 */
+    z-index: 4;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.piece-titles {
+    /* display: flex; */
+    flex-direction: column;
+    height: 15px;
+}
+.piece-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16pt;
+    z-index: 4;
+    font-weight: bold;
+    width: 300px;
+}
+
+.piece-content {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16pt;
+    z-index: 4;
+    width: 300px;
+}
+
+.piece-pic {
+    width: 300px; 
+    max-height: auto;
+    z-index: 4;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    left: 50%;
+}
+
+.user-container {
+    display: flex;
+    align-items: center; /* 將內容垂直置中 */
+    width: 300px; /* 容器寬度 */
+    height: 90px; /* 容器高度 */
+    background-color: white; /* 白色背景 */
+    border: 1px solid #ccc; /* 邊框 */
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.user-pic {
+    max-width: 50%; /* 圖片最大寬度為容器的一半 */
+    height: auto; /* 圖片高度自動調整 */
+    width: 70px;
+    height: auto;
+    margin-left: 10px;
+    margin-right: 20px; /* 圖片與文字之間的間距 */
+}
+
+.username {
+    margin: 0; /* 清除預設邊距 */
+    font-size: 18pt; /* 文字大小 */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.buy-bt {
+    display: flex;
+    align-items: center; /* 將內容垂直置中 */
+    width: 300px; /* 容器寬度 */
+    height: 50px; /* 容器高度 */
+    background-color: black; /* 白色背景 */
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    font-size: 18pt; /* 文字大小 */
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    justify-content: center;
+}

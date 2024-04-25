@@ -40,6 +40,28 @@ data.filename.forEach((ele)=> {
   img.src = `../upload/${ele}`; // 圖片路徑根據索引 i 設置
   img.alt = 'Image ' + ele;
 
+  // 添加 hover 效果
+  img.addEventListener('mouseover', function() {
+    imageWrapper.classList.add('hovered');
+  });
+  img.addEventListener('mouseout', function() {
+    imageWrapper.classList.remove('hovered');
+  });
+
+  img.addEventListener('click', function() {
+    fetch('/piece_info', { method: 'GET' })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/piece_info';
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+  });
+
   // 將 input、label 和 img 元素添加到 imageWrapper 中
   imageWrapper.appendChild(toggle);
   imageWrapper.appendChild(label);
@@ -50,11 +72,36 @@ data.filename.forEach((ele)=> {
 });
 
 pieceRecommend.forEach((ele) => {
+  const imageWrapper = document.createElement('div');
+  imageWrapper.classList.add('image-wrapper');
+
   const img = document.createElement('img');
   img.src = `../upload/${ele}`; // 圖片路徑根據索引 i 設置
   img.alt = 'Image ' + ele;
 
-  piece_container.appendChild(img);
+    // 添加 hover 效果
+  img.addEventListener('mouseover', function() {
+    imageWrapper.classList.add('hovered');
+  });
+  img.addEventListener('mouseout', function() {
+    imageWrapper.classList.remove('hovered');
+  });
+  
 
+  img.addEventListener('click', function() {
+    fetch('/piece_info', { method: 'GET' })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/piece_info';
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+  });
 
+  imageWrapper.appendChild(img);
+  piece_container.appendChild(imageWrapper);
 });
