@@ -168,9 +168,7 @@ body {
 }
 
 .add-button {
-    z-index: 3;
-    position: absolute;
-    left: 80%;
+    z-index: 4;
     border: none;
     background: none;
 }
@@ -227,15 +225,14 @@ body {
 
 /* 文字input */
 .input-text {
-    position: absolute;
     border-radius: 10px;
     border: 1px solid #000000;
     padding: 8px; 
     width: 300px;
     height: 40px;
-    left: 8%;
     z-index: 4;
     font-size: 14pt;
+    margin-top: 10px;
 }
 
 .explore-input {
@@ -603,4 +600,10 @@ select {
     font-family: 'Times New Roman', Times, serif;
     color: white;
     justify-content: center;
+}
+
+.style-container {
+    position: absolute;
+    display: flex;
+    left: 8%;
 }
