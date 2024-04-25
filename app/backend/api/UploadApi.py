@@ -8,7 +8,7 @@ service = UploadService()
 
 
 @router.post("/upload-images", status_code=200)
-async def upload_images(response:Response, username: str, files: List[UploadFile]=File(...)):
+async def upload_images(response:Response, username: str=Form(...), files: List[UploadFile]=File(...)):
     #check if image type
     allowed_extension = ["jpg", "jpeg"]
     for f in files:
