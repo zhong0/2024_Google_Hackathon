@@ -1,5 +1,5 @@
-from dao.AuthDao import AuthDao
-import utils.Const as const
+from ..dao.AuthDao import AuthDao
+from ..utils import Const as const
 import bcrypt
 import re
 

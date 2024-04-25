@@ -1,11 +1,11 @@
-from dao.RecommendHistoryDao import RecommendHistoryDao
-from dao.ClothesDao import ClothesDao
-from dao.ShopDao import ShopDao
+from ..dao.RecommendHistoryDao import RecommendHistoryDao
+from ..dao.ClothesDao import ClothesDao
+from ..dao.ShopDao import ShopDao
 
-from utils.QueryBuilder import build_recommend_query, build_explore_query, build_specific_clothes_explore_query
-from utils.GeminiService import GeminiService
+from ..utils.QueryBuilder import build_recommend_query, build_explore_query#, build_specific_clothes_explore_query
+from ..utils.GeminiService import GeminiService
 
-import utils.Const as const
+from ..utils import Const as const
 import json
     
 class RecommendService:

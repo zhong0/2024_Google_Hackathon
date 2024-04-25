@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Form
-from service.ClothService import ClothesService
+from ..service.ClothService import ClothesService
 
 router = APIRouter()
 service = ClothesService()

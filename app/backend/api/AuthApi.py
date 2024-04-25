@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
-from service.AuthService import AuthService
-from entity.UserEntity import User
+from ..service.AuthService import AuthService
+from ..entity.UserEntity import User
 
 router = APIRouter()
 auth_service = AuthService()

@@ -1,6 +1,6 @@
-from dao.ClothesDao import ClothesDao
-from utils.GeminiService import GeminiService
-import utils.Const as const
+from ..dao.ClothesDao import ClothesDao
+from ..utils.GeminiService import GeminiService
+from ..utils import Const as const
 
 import os
 import datetime
@@ -15,7 +15,7 @@ class UploadService:
     async def upload_images(self, username, files):
 
         #path to save uploaded image
-        path = os.path.join("..", "upload", username)
+        path = os.path.join(".", "upload", username)
         if not os.path.exists(path):
             os.makedirs(path)
 

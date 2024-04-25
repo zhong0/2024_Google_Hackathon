@@ -1,5 +1,5 @@
-from dao.ClothesDao import ClothesDao
-import utils.Const as const
+from ..dao.ClothesDao import ClothesDao
+from ..utils import Const as const
 
 class ClothesService:
     def __init__(self):

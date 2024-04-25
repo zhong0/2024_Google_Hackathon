@@ -1,14 +1,14 @@
 from fastapi import APIRouter, HTTPException, Form, status, Query
-from service.RecommendService import RecommendService
-from entity.RecommendRequest import RecommendRequest
-from entity.ExploreRequest import ExploreRequest
+from ..service.RecommendService import RecommendService
+from ..entity.RecommendRequest import RecommendationRequest
+from ..entity.ExploreRequest import ExploreRequest
 import json
 
 router = APIRouter()
 service = RecommendService()
 
 @router.post("/recommend-by-text")
-def recommend_by_text(request: RecommendRequest):
+def recommend_by_text(request: RecommendationRequest):
     return service.recommend_from_wardrobe(
         username=request.username,
         style=request.style,
