@@ -41,7 +41,6 @@ def build_explore_query(user_clothes, shop_clothes, style, recommend_count):
         query_parts.append(str(style))
 
     query_parts.append("Recommend the " + str(recommend_count) + " most suitable outfits.")
-    query_parts.append("一件shop的衣服搭配一件自己的衣服")
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
     
     recommendations = [
@@ -61,3 +60,21 @@ def build_explore_query(user_clothes, shop_clothes, style, recommend_count):
 
     query = "\n".join(query_parts)
     return query
+
+def build_explore_pieces_recommend(user_clothes, shop_clothes, style, specific_clothes, recommend_count):
+    query_parts = [
+        "Here is all the information about the clothing from the user and shop:",
+        json.dumps(user_clothes, indent=2),
+        json.dumps(shop_clothes, indent=2),
+        "The recommendation must include the following specific garments:",
+        json.dumps(specific_clothes, indent=2)
+    ]
+
+    if style:
+        query_parts.append("Please follow the style criteria provided above:")
+        query_parts.append(json.dumps(style, indent=2))
+
+    query_parts.append(f"Recommend the top {recommend_count} most suitable clothes outfits including specified garments. Response format:")
+    query_parts.append(json.dumps(["clothes_file_name_1", "clothes_file_name_2"], indent=2))
+
+    return "\n".join(query_parts)
