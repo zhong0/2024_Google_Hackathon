@@ -3,8 +3,10 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
+from backend.api.Router import api_router
 
 app = FastAPI()
+app.include_router(api_router)
 
 templates = Jinja2Templates(directory="frontend")
 
@@ -22,4 +24,20 @@ async def read_root(request: Request):
 
 @app.get("/fitting_style", response_class=HTMLResponse)
 async def fitting_style(request: Request):
-    return templates.TemplateResponse("fittingstyle.html", {"request": request})
+    return templates.TemplateResponse("fittingStyleOcca.html", {"request": request})
+
+@app.get("/fitting_clothes", response_class=HTMLResponse)
+async def fitting_clothes(request: Request):
+    return templates.TemplateResponse("fittingClothes.html", {"request": request})
+
+@app.get("/fitting_result", response_class=HTMLResponse)
+async def fitting_result(request: Request):
+    return templates.TemplateResponse("fittingResult.html", {"request": request})
+
+@app.get("/explore", response_class=HTMLResponse)
+async def explore(request: Request):
+    return templates.TemplateResponse("explore.html", {"request": request})
+
+@app.get("/explore_intro", response_class=HTMLResponse)
+async def explore_intro(request: Request):
+    return templates.TemplateResponse("exploreIntro.html", {"request": request})
