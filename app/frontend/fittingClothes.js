@@ -4,18 +4,19 @@ const pickclothes_container = document.getElementById("pickclothes-scroll-contai
 const chosen_container = document.getElementById("chosen-scroll-container-wrapper");
 const next_button = document.getElementById("next-bt");
 
-console.log('styleToggle:', JSON.parse(localStorage.getItem('styleToggleSelected')))
-console.log('occasionToggle:', JSON.parse(localStorage.getItem('occasionToggleSelected')))
+
 
 // 從 API 拿
-let options = ["Top", "Bottom", "Shoes", "Clothes"];
-let imageListData = [
+//let options = ["Top", "Bottom", "Shoes", "Clothes"];
+let options = [];
+/*let imageListData = [
     { id: 1, filename: "../upload/zhong0/01.jpg", "chosen": false, 'category': 'Bottom'},
     { id: 2, filename: "../upload/zhong0/02.jpg", "chosen": false, 'category': 'Bottom'},
     { id: 3, filename: "../upload/zhong0/03.jpg", "chosen": false, 'category': 'Bottom'},
     { id: 4, filename: "../upload/zhong0/04.jpg", "chosen": false, 'category': 'Top'},
     { id: 5, filename: "../upload/zhong0/05.jpg", "chosen": false, 'category': 'Bottom'}
-];
+];*/
+let imageListData = [];
 let chosenList = [];
 let selectedValue = "";
 
@@ -50,12 +51,7 @@ function clotheChosen(imageList) {
 }
 
 
-options.forEach(option => {
-    const optionElement = document.createElement("option");
-    optionElement.text = option;
-    optionElement.value = option;
-    clothestype_dropdown.appendChild(optionElement);
-});
+
 
 clotheChosen(imageListData);
 
@@ -78,6 +74,7 @@ next_button.addEventListener('click', () => {
     fetch('/fitting_result', { method: 'GET' })
         .then(response => {
             if (response.ok) {
+                localStorage.setItem('specific_clothes', JSON.stringify(getChosenCloths()));
                 window.location.href = '/fitting_result';
             } else {
                 console.error('Error:', response.statusText);
@@ -86,4 +83,59 @@ next_button.addEventListener('click', () => {
         .catch(error => {
             console.error('Error:', error);
         });
+});
+
+function getChosenCloths(){
+    //return a list of chosen clothes' filename which cloth.chosen is true
+    let chosen_clothes = [];
+    imageListData.forEach(cloth =>{;
+        if(cloth.chosen){
+            chosen_clothes.push(cloth.filename);
+        }
+    });
+    return chosen_clothes;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form_data = new FormData();
+    form_data.append('username','chiPi_data');
+
+    const request_options = {
+        method:'POST',
+        body:form_data
+    }
+    
+    fetch('/clothes/file-path-group-by-category', request_options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let idex = 1;
+            let file_path = '../upload/';
+            console.log(data.file_path)
+            //set imageListData
+            for(let category in data.file_path){
+                options.push(category);
+                let filenames = data.file_path[category];
+                filenames.forEach( (filename) =>{
+                    imageListData.push({ id: idex, filename: file_path+filename, chosen: false, category: category});
+                    idex += 1;
+                });
+            }
+            //set dropdown by options
+            options.forEach(option => {
+                const optionElement = document.createElement("option");
+                optionElement.text = option;
+                optionElement.value = option;
+                clothestype_dropdown.appendChild(optionElement);
+            });
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+    
 });

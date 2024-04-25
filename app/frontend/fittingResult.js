@@ -4,6 +4,10 @@ const recommend_container = document.getElementById("recommend-scroll-container-
 const description_text = document.getElementById("description-text");
 const home_button = document.getElementById("home-bt");
 
+console.log('styleToggle:', JSON.parse(localStorage.getItem('styleToggleSelected')))
+console.log('occasionToggle:', JSON.parse(localStorage.getItem('occasionToggleSelected')))
+console.log('specific_clothes:', JSON.parse(localStorage.getItem('specific_clothes')))
+
 // from API
 let imageListData = [
     { id: 1, filename: "../upload/zhong0/01.jpg", "chosen": false, 'category': 'Bottom'},
