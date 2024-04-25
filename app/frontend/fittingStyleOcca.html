@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FastAPI with HTML</title>
+    <title>OOTDAI</title>
     <link rel="stylesheet" type="text/css" href="../resource/styles.css">
 </head>
 <body>
@@ -25,10 +25,13 @@
     <div class="text-style" style="top: 300px;">
         <img style = "max-width: 60px; height: auto;" src="../resource/style_word.png" alt="style">
     </div>
-    <input id="style-input" type="text" class="input-text" style="top: 335px;" placeholder="cute; handsome; etc.">
-    <div class="add-button" style=" top: 325px;">
-        <input type="image" id="add-style-bt" style="width: 80px; height: auto;" src="../resource/add_bt.png" alt="add-style">
+    <div class="style-container" style=" top: 325px;">
+        <input id="style-input" type="text" class="input-text" style="top: 335px;" placeholder="cute; handsome; etc.">
+        <div class="add-button">
+            <input type="image" id="add-style-bt" style="width: 80px; height: auto;" src="../resource/add_bt.png" alt="add-style">
+        </div>
     </div>
+    
 
     <div id="style-toggle-btn" class="toggle-container" style="top: 405px;"></div>
 
@@ -36,9 +39,11 @@
     <div class="text-style" style="top: 575px;">
         <img style = "max-width: 90px; height: auto;" src="../resource/occasion_word.png" alt="occasion">
     </div>
-    <input id="occasion-input" type="text" class="input-text" style="top: 610px;" placeholder="party; business; etc.">
-    <div class="add-button" style=" top: 600px;">
-        <input type="image" id="add-occasion-bt" style="width: 80px; height: auto;" src="../resource/add_bt.png" alt="add-occasion">
+    <div class="style-container" style=" top: 600px;">
+        <input id="occasion-input" type="text" class="input-text" placeholder="party; business; etc.">
+        <div class="add-button">
+            <input type="image" id="add-occasion-bt" style="width: 80px; height: auto;" src="../resource/add_bt.png" alt="add-occasion">
+        </div>
     </div>
 
     <div id="occasion-toggle-btn" class="toggle-container" style="top: 680px;"></div>

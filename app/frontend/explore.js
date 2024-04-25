@@ -1,6 +1,6 @@
 const explore_container = document.getElementById('explore-set-container');
 //from API
-data = [{
+const data = [{
     filename: ['zhong0/02.jpg', 'zhong0/04.jpg'],
     style: ['casuel', 'simple'],
     description:'this is a simple style clothes'
