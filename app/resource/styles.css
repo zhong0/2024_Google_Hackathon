@@ -607,3 +607,40 @@ select {
     display: flex;
     left: 8%;
 }
+
+.login-container {
+    position:absolute;
+    display: flex;
+    flex-direction: column; /* 將元素垂直排列 */
+    width: 300px;
+    top:350px;
+    z-index: 4;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.account-input-text {
+    z-index: 4;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    padding: 8px; 
+    width: 280px;
+    height: 40px;
+    font-size: 14pt;
+    margin-top: 10px;
+ 
+}
+
+.login-bt {
+    display: flex;
+    align-items: center; /* 將內容垂直置中 */
+    width: 300px; /* 容器寬度 */
+    height: 50px; /* 容器高度 */
+    background-color: black; /* 白色背景 */
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    font-size: 18pt; /* 文字大小 */
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    justify-content: center;
+}

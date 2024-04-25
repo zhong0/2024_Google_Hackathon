@@ -1,6 +1,7 @@
 const fittingNow_button = document.getElementById('fitting-bt');
 const piece_container = document.getElementById('homepage-piece-gallery');
 const explore_button = document.querySelector('.explore-button-container');
+const closet_button = document.getElementById('selfclothes-bt');
 
 const data = [
     {id: 1, filename: 'zhong0/23.jpg'},
@@ -8,7 +9,6 @@ const data = [
     {id: 3, filename: 'zhong0/21.jpg'},
 ];
 
-console.log('joo')
 data.forEach((ele) => {
     const imageWrapper = document.createElement('div');
     imageWrapper.classList.add('image-wrapper');
@@ -40,11 +40,11 @@ data.forEach((ele) => {
         });
     });
 
-  // 將 input、label 和 img 元素添加到 imageWrapper 中
-  imageWrapper.appendChild(img);
+    // 將 input、label 和 img 元素添加到 imageWrapper 中
+    imageWrapper.appendChild(img);
 
-  // 將 imageWrapper 添加到父容器中
-  piece_container.appendChild(imageWrapper);
+    // 將 imageWrapper 添加到父容器中
+    piece_container.appendChild(imageWrapper);
 })
 
 fittingNow_button.addEventListener('click', () => {
@@ -66,6 +66,20 @@ explore_button.addEventListener('click', () => {
         .then(response => {
             if (response.ok) {
                 window.location.href = '/explore';
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
+closet_button.addEventListener('click', () => {
+    fetch('/login', { method: 'GET' })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/login';
             } else {
                 console.error('Error:', response.statusText);
             }
