@@ -7,21 +7,23 @@ const addOccasion_input = document.getElementById('occasion-input');
 const nextPage_button = document.getElementById('next-bt');
 
 // from API
-let styleToggle = [
+/*let styleToggle = [
     { id: 1, text: 'Toggle 1', checked: false },
     { id: 2, text: 'Toggle 2', checked: false },
     { id: 3, text: 'Toggle 3', checked: false },
-    { id: 4, text: 'Toggle 4', checked: false },
-    { id: 5, text: 'Toggle 5', checked: false }
+    { id: 6, text: 'Toggle 4', checked: false },
+    { id: 9, text: 'Toggle 5', checked: false }
 ];
 
 let occasionToggle = [
-    { id: 6, text: 'Toggle 1', checked: false },
+    { id: 4, text: 'Toggle 1', checked: false },
     { id: 7, text: 'Toggle 2', checked: false },
     { id: 8, text: 'Toggle 3', checked: false },
-    { id: 9, text: 'Toggle 4', checked: false },
+    { id: 5, text: 'Toggle 4', checked: false },
     { id: 10, text: 'Toggle 5', checked: false }
-];
+];*/
+let styleToggle = [];
+let occasionToggle = [];
 
 function add_toggle(id, text, checked, container) {
     // create input element
@@ -62,7 +64,7 @@ function showMessage(message) {
 }
 
 // choose style
-styleToggle.forEach(params => {
+/*styleToggle.forEach(params => {
     add_toggle(params.id, params.text, params.checked, style_container);
 
 });
@@ -70,7 +72,7 @@ styleToggle.forEach(params => {
 // choose occasion
 occasionToggle.forEach(params => {
     add_toggle(params.id, params.text, params.checked, occasion_container);
-});
+});*/
 
 addStyle_button.addEventListener('click', () => {
     let style_input = addStyle_input.value;
@@ -114,6 +116,9 @@ nextPage_button.addEventListener('click', () => {
     fetch('/fitting_clothes', { method: 'GET' })
         .then(response => {
             if (response.ok) {
+                //store to localstorage
+                localStorage.setItem('styleToggleSelected', JSON.stringify(getCheckedToggle(styleToggle)));
+                localStorage.setItem('occasionToggleSelected', JSON.stringify(getCheckedToggle(occasionToggle)));
                 window.location.href = '/fitting_clothes';
             } else {
                 console.error('Error:', response.statusText);
@@ -121,6 +126,83 @@ nextPage_button.addEventListener('click', () => {
         })
         .catch(error => {
             console.error('Error:', error);
+        });
+});
+
+function getCheckedToggle(toggle){
+    //return a list of toggle.text whick checkbox.checked is true
+    let checkedToggle = [];
+    toggle.forEach(t =>{
+        if(document.getElementById(t.id).checked){
+            checkedToggle.push(t.text);
+        }
+    });
+    return checkedToggle;
+}
+
+
+function loadStyleToggleData(toggleNames){
+    //get total toggle button numbers
+    let allToggleLegnth = styleToggle.concat(occasionToggle).length;
+    for(const toggleName of toggleNames){
+        allToggleLegnth += 1;
+        styleToggle.push({ id: allToggleLegnth, text: toggleName, checked: false })
+    }
+    styleToggle.forEach(params => {
+        add_toggle(params.id, params.text, params.checked, style_container);
+    
+    });
+}
+
+function loadOccasionToggleData(toggleNames){
+    //get total toggle button numbers
+    let allToggleLegnth = styleToggle.concat(occasionToggle).length;
+    for(const toggleName of toggleNames){
+        allToggleLegnth += 1;
+        occasionToggle.push({ id: allToggleLegnth, text: toggleName, checked: false })
+    }
+    occasionToggle.forEach(params => {
+        add_toggle(params.id, params.text, params.checked, occasion_container);
+    
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const form_data = new FormData();
+    form_data.append('username','chiPi_data');
+
+    const request_options = {
+        method:'POST',
+        body:form_data
+    }
+
+    fetch('clothes/style', request_options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            //set toggle button by data 
+            loadStyleToggleData(data.style);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+    fetch('clothes/occasion', request_options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            //set toggle button by data 
+            loadOccasionToggleData(data.occasion);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
         });
 });
 

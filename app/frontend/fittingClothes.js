@@ -4,6 +4,9 @@ const pickclothes_container = document.getElementById("pickclothes-scroll-contai
 const chosen_container = document.getElementById("chosen-scroll-container-wrapper");
 const next_button = document.getElementById("next-bt");
 
+console.log('styleToggle:', JSON.parse(localStorage.getItem('styleToggleSelected')))
+console.log('occasionToggle:', JSON.parse(localStorage.getItem('occasionToggleSelected')))
+
 // 從 API 拿
 let options = ["Top", "Bottom", "Shoes", "Clothes"];
 let imageListData = [
