@@ -154,6 +154,13 @@ class ClothesDao:
 
         return result.acknowledged
     
+    def get_favorite_set(self, username):
+        user_document = self.collection.find_one({"username": username}, {"favorite_set": 1, "_id": 0})
+        if user_document:
+            return user_document.get('favorite_set', [])
+        else:
+            return []
+    
     def insert_favorite_set(self, username, filename_list):
         clothes_data_ = self.collection.find({"username":username})
         if len(list(clothes_data_)) == 0:
