@@ -225,26 +225,6 @@ body {
     background: none;
 }
 
-
-/* 照片兩排 */
-.grid-container {
-    top: 650px;
-    display: grid;
-    position: absolute;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 5px;
-    justify-items: center;
-    z-index: 4;
-    left: 8%;
-    right: 8%;
-}
-
-.grid-image {
-    width: 175px; 
-    height: auto;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-
 /* 文字input */
 .input-text {
     position: absolute;
@@ -505,10 +485,11 @@ select {
     width: 360px;
     left: 8%;
     top: 850px;
-    /* margin-top: 80px; */
     display: flex; /* Make images display horizontally */
     overflow-x: auto; /* Enable horizontal scrollbar */
     scroll-snap-type: x mandatory; /* Enable snapping */
+    left: 50%;
+    transform: translate(-50%, 0);
 }
   
 .explore-piece-image-gallery img {
