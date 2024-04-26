@@ -74,7 +74,7 @@ next_button.addEventListener('click', () => {
     fetch('/fitting_result', { method: 'GET' })
         .then(response => {
             if (response.ok) {
-                localStorage.setItem('specific_clothes', JSON.stringify(getChosenCloths()));
+                localStorage.setItem('specific_clothes', JSON.stringify(getChosenClothes()));
                 window.location.href = '/fitting_result';
             } else {
                 console.error('Error:', response.statusText);
@@ -85,7 +85,7 @@ next_button.addEventListener('click', () => {
         });
 });
 
-function getChosenCloths(){
+function getChosenClothes(){
     //return a list of chosen clothes' filename which cloth.chosen is true
     let chosen_clothes = [];
     imageListData.forEach(cloth =>{
