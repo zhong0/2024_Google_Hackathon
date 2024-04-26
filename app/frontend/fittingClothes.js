@@ -88,9 +88,10 @@ next_button.addEventListener('click', () => {
 function getChosenCloths(){
     //return a list of chosen clothes' filename which cloth.chosen is true
     let chosen_clothes = [];
-    imageListData.forEach(cloth =>{;
+    imageListData.forEach(cloth =>{
+        let filename = cloth.filename.replace("../upload/", "");
         if(cloth.chosen){
-            chosen_clothes.push(cloth.filename);
+            chosen_clothes.push(filename);
         }
     });
     return chosen_clothes;
