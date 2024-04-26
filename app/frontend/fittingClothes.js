@@ -53,7 +53,7 @@ function clotheChosen(imageList) {
 
 
 
-clotheChosen(imageListData);
+
 
 clothestype_dropdown.addEventListener("change", function() {
     selectedValue = clothestype_dropdown.value;
@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     idex += 1;
                 });
             }
+            clotheChosen(imageListData);
             //set dropdown by options
             options.forEach(option => {
                 const optionElement = document.createElement("option");
