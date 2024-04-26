@@ -41,3 +41,15 @@ async def explore(request: Request):
 @app.get("/explore_intro", response_class=HTMLResponse)
 async def explore_intro(request: Request):
     return templates.TemplateResponse("exploreIntro.html", {"request": request})
+
+@app.get("/piece_info", response_class=HTMLResponse)
+async def piece_info(request: Request):
+    return templates.TemplateResponse("pieceInfo.html", {"request": request})
+
+@app.get("/login", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+@app.get("/closet", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("closet.html", {"request": request})
