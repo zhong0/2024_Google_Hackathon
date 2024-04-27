@@ -20,7 +20,7 @@ toggleBtn.addEventListener('change', function() {
       } else {
         toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
       }
-    });
+});
 
 imageListData.forEach(function(imageSrc) {
     const imageContainer = document.createElement("div");
