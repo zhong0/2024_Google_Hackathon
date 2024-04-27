@@ -23,12 +23,12 @@ class AuthService:
         return False
     
     # 用戶名長度至少5個字符
-    def is_validate_username(username: str) -> bool:
+    def is_validate_username(self, username: str) -> bool:
         
         return len(username) >= 5
 
     # 密碼至少8個字符且包含至少一個數字和一個字母
-    def is_validate_password(password: str) -> bool:
+    def is_validate_password(self, password: str) -> bool:
         if len(password) < 8:
             return False
         if not re.search("[a-zA-Z]", password):
