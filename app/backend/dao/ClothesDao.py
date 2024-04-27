@@ -155,6 +155,8 @@ class ClothesDao:
         return result.acknowledged
     
     def insert_favorite_set(self, username, filename_list):
+        #currently cannot test by swaggerui
+        #print(filename_list, len(filename_list))
         clothes_data_ = self.collection.find({"username":username})
         if len(list(clothes_data_)) == 0:
             if self.create_username(username):
@@ -165,9 +167,34 @@ class ClothesDao:
         else:
             result = self.collection.find_one({"username":username})
             id_offset = len(result.get("favorite_set"))
-            result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "favorite_set.clothes_list": filename_list}]}}})
+            result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "clothes_list": filename_list}]}}})
         
         return result.acknowledged
+
+    def remove_favorite_set(self, username, filename_list):
+        #currently cannot test by swaggerui
+        #print(username, filename_list, len(filename_list))
+        clothes_data_ = self.collection.find({"username":username})
+        if len(list(clothes_data_)) == 0:
+            return False
+        else:
+            query = {
+                "favorite_set": {
+                    "$elemMatch": {
+                        "clothes_list": {"$all": filename_list, "$size": len(filename_list)}
+                    }
+                },
+                "username":username
+            }
+            # remove matched favrite_set by pull
+            update = {
+                "$pull": {
+                    "favorite_set": {"clothes_list": {"$all": filename_list, "$size": len(filename_list)}}
+                }
+            }
+            
+            result = self.collection.update_many(query, update)
+        return result.modified_count
 
     def __del__(self):
         self.client.close()

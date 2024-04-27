@@ -53,3 +53,11 @@ def insert_favorite_set(username: str = Form(...), filename_list:list[str] = For
     if filename_list is None:
         raise HTTPException(status_code=400, detail="Filenames is required")
     return service.insert_favorite_set(username, filename_list)
+
+@router.post("/remove-favorite-set")
+def remove_favorite_set(username: str = Form(...), filename_list:list[str] = Form(...)):
+    if username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+    if filename_list is None:
+        raise HTTPException(status_code=400, detail="Filenames is required")
+    return service.remove_favorite_set(username, filename_list)
