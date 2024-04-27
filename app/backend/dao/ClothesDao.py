@@ -120,14 +120,14 @@ class ClothesDao:
             {"$match": {"clothes.filename": filename}},  
             {"$project": {  
                 "name": "$clothes.name",
-                "uuid": "$clothes.uuid",
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
                 "details": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
-                "filename": "$clothes.filename"
+                "filename": "$clothes.filename",
+                "_id": 0
             }}
         ]
         

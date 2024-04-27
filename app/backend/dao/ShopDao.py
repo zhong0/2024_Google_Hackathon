@@ -13,8 +13,10 @@ class ShopDao:
         return username_list
     
     # for explore-outfit & explore-pieces-recommed
-    def get_all_shop_clothes_info(self):
+    def get_all_shop_clothes_info(self, username):
         pipeline = [
+            # Exclude clothes associated with the given username
+            {"$match": {"username": {"$ne": username}}},
             {"$unwind": "$clothes"},
             {"$project": {
                 "name": "$clothes.name",
@@ -29,6 +31,7 @@ class ShopDao:
             }}
         ]
         clothes_list = list(self.collection.aggregate(pipeline))
+
         return clothes_list
     
     def get_clothes_info_by_filename(self, filename):
@@ -72,7 +75,6 @@ class ShopDao:
         filename_list = [result['filename'] for result in results if 'filename' in result]
         return str(filename_list)
 
-
     def get_clothes_info(self, username):
         pipeline = [
             {"$match": {"username": username}},
@@ -92,7 +94,3 @@ class ShopDao:
         ]
         clothes_info_list = list(self.collection.aggregate(pipeline))
         return clothes_info_list
-
-
-        
-  

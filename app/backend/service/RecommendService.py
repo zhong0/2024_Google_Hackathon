@@ -58,7 +58,7 @@ class RecommendService:
         if style :
             style = self.clothes_dao.get_all_distinct_style(username)
  
-        shop_clothes = self.shop_dao.get_all_shop_clothes_info()  
+        shop_clothes = self.shop_dao.get_all_shop_clothes_info(username)  
 
         # build query
         query = build_explore_query(user_clothes, shop_clothes, style, recommend_count)
@@ -68,51 +68,60 @@ class RecommendService:
         # send request to gemini
         response = self.gemini_service.recommend_by_text(query)
         print("--------------------------")
-        print("response: " , response)
+        print("response: " , str(response))
 
         # parse response to json formatt
-        recommend_result = self.parse_response_to_json(str(response), recommend_count)
+        recommend_result = self.parse_response_to_json(response)
 
         # send result (recommend_set, discription, style)
         return recommend_result
     
-    def explore_pieces_recommendation(self, username, style, specific_clothes_filename, recommend_count):
-        user_specific_clothes = self.clothes_dao.get_clothes_info_by_filename(username, specific_clothes_filename)
-        recommend_specific_clothes = self.shop_dao.get_clothes_info_by_filename(specific_clothes_filename)
-        
+    def explore_pieces_recommendation(self, username, style, specific_clothes_filenames, recommend_count):
+        specific_clothes = []
+        for filename in specific_clothes_filenames:
+            clothes_info = self.clothes_dao.get_clothes_info_by_filename(username, filename)
+            if clothes_info:
+                specific_clothes.append(clothes_info)
+            
+            clothes_info = self.shop_dao.get_clothes_info_by_filename(filename)
+            if clothes_info:
+                specific_clothes.append(clothes_info)    
+
         if style :
             style = self.clothes_dao.get_all_distinct_style(username)
 
-        shop_clothes = self.shop_dao.get_all_shop_clothes_info()  
+        shop_clothes = self.shop_dao.get_all_shop_clothes_info(username)  
         user_clothes = self.clothes_dao.get_all_clothes_info(username)
 
         # build query
         query = build_explore_pieces_recommend(
-            user_clothes, shop_clothes, style, user_specific_clothes, recommend_count)
+            user_clothes, shop_clothes, style, specific_clothes, recommend_count)
         print("--------------------------")
         print("query: " , query)
 
         # send request to gemini
         response = self.gemini_service.recommend_by_text(query)
         print("--------------------------")
-        print("response: " , response)
+        print("response: " , str(response))
 
         # parse response to json formatt
-        recommend_result = self.parse_response_to_json(str(response), recommend_count)
+        recommend_result = self.parse_response_to_json(response)
 
         # send result (recommend_set, discription, style)
         return recommend_result
 
-    
     @staticmethod
-    def parse_response_to_json(response, recommend_count):
-        # 暫時寫死怎麼取其中json
-        json_str = []
-        if recommend_count == 1:
-            json_str = response[7:-4]
-        else:    
-            json_str = response[7:-5]
+    def parse_response_to_json(response):
 
+        lines = response.split('\n')
+        json_line = ""
+        for line in lines :
+            print("---------------")
+            print(line)
+            if line and line[0] != '`':
+                json_line = json_line + line
+        
+        json_str = json_line
         print("Extracted JSON string:", json_str)
 
         try:

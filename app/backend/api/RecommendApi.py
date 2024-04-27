@@ -1,15 +1,17 @@
-from fastapi import APIRouter, HTTPException, Form, status, Query
+from fastapi import APIRouter, Form, Query, HTTPException
 from service.RecommendService import RecommendService
 from entity.RecommendRequest import RecommendRequest
 from entity.ExploreRequest import ExploreRequest
 from entity.ExplorePiecesRequest import ExplorePiecesRequest
-import utils.Const as const
 
 router = APIRouter()
 service = RecommendService()
 
 @router.post("/recommend-by-text")
 def recommend_by_text(request: RecommendRequest):
+    if request.username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+    
     return service.recommend_from_wardrobe(
         username=request.username,
         style=request.style,
@@ -19,6 +21,9 @@ def recommend_by_text(request: RecommendRequest):
 
 @router.post("/explore-outfit")
 def explore_outfit(request: ExploreRequest):
+    if request.username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+    
     return service.explore_outfit(
         request.username,
         request.style,
@@ -26,7 +31,12 @@ def explore_outfit(request: ExploreRequest):
     )
 
 @router.post("/explore-pieces-recommendation")
-def explore_outfit(request: ExplorePiecesRequest):
+def explore_pieces_recommendation(request: ExplorePiecesRequest):
+    if not request.specific_clothes:
+        raise HTTPException(status_code=400, detail="The specific_clothes list cannot be empty.")
+    if request.username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+     
     return service.explore_pieces_recommendation(
         request.username,
         request.style,
