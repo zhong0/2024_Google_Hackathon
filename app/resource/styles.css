@@ -715,3 +715,17 @@ select {
     pointer-events: none; /* 這樣可以讓鼠標事件穿過覆蓋層，以便點擊到圖片 */
     z-index: 5;
 }
+
+.username-input {
+    position: absolute;
+    border-radius: 50px;
+    border: 1px solid #000000;
+    padding: 10px; 
+    width: 50%;
+    height: 40px;
+    right: 6%;
+    z-index: 4;
+    font-size: 16pt;
+    justify-content: center;
+    top: 150px;
+}

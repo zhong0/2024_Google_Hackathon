@@ -51,3 +51,7 @@ async def login(request: Request):
 @app.get("/closet", response_class=HTMLResponse)
 async def login(request: Request):
     return templates.TemplateResponse("closet.html", {"request": request})
+
+@app.get("/favorite_set", response_class=HTMLResponse)
+async def favorite_set(request: Request):
+    return templates.TemplateResponse("favoriteSet.html", {"request": request})

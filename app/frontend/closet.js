@@ -4,6 +4,8 @@ const choice_list = document.getElementById('choice-list');
 const delete_button =  document.getElementById('delete-bt');
 const addStore_button =  document.getElementById('add-to-store-bt');
 const clothesDetail_input = document.getElementById('add-store-detail');
+const favorite_button =  document.getElementById('favorite-bt');
+const store_button =  document.getElementById('store-bt');
 
 let selectedImage = null;
 let previousSelected = null;
@@ -101,4 +103,18 @@ addStore_button.addEventListener('click', () => {
 
 clothesDetail_input.addEventListener('click', () => {
     
+});
+
+favorite_button.addEventListener('click', () => {
+    fetch('/favorite_set', { method: 'GET' })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/favorite_set';
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });
