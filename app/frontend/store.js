@@ -1,11 +1,25 @@
 const clothestype_dropdown = document.getElementById("clothestype-dropdown");
-const closet_container = document.getElementById('closet_container');
+const store_container = document.getElementById('store-container');
 const choice_list = document.getElementById('choice-list');
-const delete_button =  document.getElementById('delete-bt');
-const addStore_button =  document.getElementById('add-to-store-bt');
+const remove_button =  document.getElementById('remove-bt');
+const modification_button =  document.getElementById('modification-bt');
 const clothesDetail_input = document.getElementById('add-store-detail');
 const favorite_button =  document.getElementById('favorite-bt');
 const store_button =  document.getElementById('store-bt');
+
+let price_input = document.getElementById('price-input');
+let size_input = document.getElementById('size-input');
+let brand_input = document.getElementById('brand-input');
+let detail_input = document.getElementById('detail-input');
+
+price_input.value = '10';
+size_input.value = 'M';
+brand_input.value = 'nike';
+detail_input.value = 'This is a sports style shorts.';
+
+// myUsername from localStorage; nowUsername from api
+const myUsername = 'zhong0';
+const nowUsername = 'zhong0';
 
 let selectedImage = null;
 let previousSelected = null;
@@ -38,30 +52,43 @@ function clotheChosen(imageList) {
         });
     
         img.addEventListener('click', function() {
-            if (selectedImage) {
-                selectedImage.classList.remove('selected');
-                document.querySelectorAll('.image-wrapper.clicked').forEach((image) => {
-                    image.classList.remove('clicked');
-                    image.classList.remove('hovered');
+            if (nowUsername !== myUsername) {
+                fetch('/piece_info', { method: 'GET' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/piece_info';
+                    } else {
+                        console.error('Error:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                 });
-                choice_list.style.display = 'none';
-                clothesDetail_input.style.display = 'none';
-            }
-            if (img === selectedImage) {
-                selectedImage = null;
             } else {
-                img.classList.add('selected');
-                selectedImage = img;
-                imageWrapper.classList.add('clicked');
-                choice_list.style.display = 'block';
+                if (selectedImage) {
+                    selectedImage.classList.remove('selected');
+                    document.querySelectorAll('.image-wrapper.clicked').forEach((image) => {
+                        image.classList.remove('clicked');
+                        image.classList.remove('hovered');
+                    });
+                    choice_list.style.display = 'none';
+                    clothesDetail_input.style.display = 'none';
+                }
+                if (img === selectedImage) {
+                    selectedImage = null;
+                } else {
+                    img.classList.add('selected');
+                    selectedImage = img;
+                    imageWrapper.classList.add('clicked');
+                    choice_list.style.display = 'block';
+                }
             }
+            
         });
-    
         // 將 input、label 和 img 元素添加到 imageWrapper 中
         imageWrapper.appendChild(img);
-        
         // 將 imageWrapper 添加到父容器中
-        closet_container.appendChild(imageWrapper);
+        store_container.appendChild(imageWrapper);
     })
 
 }
@@ -77,7 +104,7 @@ options.forEach(option => {
 
 clothestype_dropdown.addEventListener("change", function() {
     selectedValue = clothestype_dropdown.value;
-    closet_container.innerHTML = "";
+    store_container.innerHTML = "";
     let filterImage = []
     if (selectedValue !== "") {
         filterImage = data.filter((ele) => (ele.category === selectedValue));
@@ -88,11 +115,11 @@ clothestype_dropdown.addEventListener("change", function() {
     
 });
 
-delete_button.addEventListener('click', () => {
+remove_button.addEventListener('click', () => {
     
 });
 
-addStore_button.addEventListener('click', () => {
+modification_button.addEventListener('click', () => {
     if(clothesDetail_input.style.display === 'none') {
         clothesDetail_input.style.display = 'block';
     } else {
