@@ -153,6 +153,22 @@ class ClothesDao:
             result =  self.collection.update_one({"username":username}, { "$push": {"clothes": { "$each": clothes_data}}})
 
         return result.acknowledged
+
+    def is_favorite_set_repeated(self, username, filename_list):
+        query = {
+                "favorite_set": {
+                    "$elemMatch": {
+                        "clothes_list": {"$all": filename_list, "$size": len(filename_list)}
+                    }
+                },
+                "username":username
+            }
+        result = self.collection.find_one(query)
+        print(result)
+        if result:
+            return True
+        else:
+            return False
     
     def insert_favorite_set(self, username, filename_list):
         #currently cannot test by swaggerui
@@ -165,10 +181,12 @@ class ClothesDao:
             else:
                 return {"error":"can't create new username"}
         else:
-            result = self.collection.find_one({"username":username})
-            id_offset = len(result.get("favorite_set"))
-            result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "clothes_list": filename_list}]}}})
-        
+            if not self.is_favorite_set_repeated(username, filename_list):
+                result = self.collection.find_one({"username":username})
+                id_offset = len(result.get("favorite_set"))
+                result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "clothes_list": filename_list}]}}})
+            else:
+                return False
         return result.acknowledged
 
     def remove_favorite_set(self, username, filename_list):
