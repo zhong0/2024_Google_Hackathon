@@ -22,4 +22,32 @@ async def read_root(request: Request):
 
 @app.get("/fitting_style", response_class=HTMLResponse)
 async def fitting_style(request: Request):
-    return templates.TemplateResponse("fittingstyle.html", {"request": request})
+    return templates.TemplateResponse("fittingStyleOcca.html", {"request": request})
+
+@app.get("/fitting_clothes", response_class=HTMLResponse)
+async def fitting_clothes(request: Request):
+    return templates.TemplateResponse("fittingClothes.html", {"request": request})
+
+@app.get("/fitting_result", response_class=HTMLResponse)
+async def fitting_result(request: Request):
+    return templates.TemplateResponse("fittingResult.html", {"request": request})
+
+@app.get("/explore", response_class=HTMLResponse)
+async def explore(request: Request):
+    return templates.TemplateResponse("explore.html", {"request": request})
+
+@app.get("/explore_intro", response_class=HTMLResponse)
+async def explore_intro(request: Request):
+    return templates.TemplateResponse("exploreIntro.html", {"request": request})
+
+@app.get("/piece_info", response_class=HTMLResponse)
+async def piece_info(request: Request):
+    return templates.TemplateResponse("pieceInfo.html", {"request": request})
+
+@app.get("/login", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("login.html", {"request": request})
+
+@app.get("/closet", response_class=HTMLResponse)
+async def login(request: Request):
+    return templates.TemplateResponse("closet.html", {"request": request})
