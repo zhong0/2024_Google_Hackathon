@@ -10,6 +10,9 @@ const data = [
     {id: 2, filename: 'zhong0/22.jpg'},
     {id: 3, filename: 'zhong0/21.jpg'},
 ];
+console.log('username:', localStorage.getItem('username'));
+//localStorage.removeItem('username');
+
 
 data.forEach((ele) => {
     const imageWrapper = document.createElement('div');
@@ -53,7 +56,12 @@ fittingNow_button.addEventListener('click', () => {
     fetch('/fitting_style', { method: 'GET' })
         .then(response => {
             if (response.ok) {
-                window.location.href = '/fitting_style';
+                if(localStorage.getItem('username')){
+                    window.location.href = '/fitting_style';
+                } else {
+                    window.location.href = '/login';
+                }
+                
             } else {
                 console.error('Error:', response.statusText);
             }
@@ -78,7 +86,11 @@ explore_button.addEventListener('click', () => {
 });
 
 upload_button.addEventListener('click', () => {
-    upload_file_input.click();
+    if(localStorage.getItem('username')){
+        upload_file_input.click();
+    } else {
+        window.location.href = '/login';
+    }
 });
 
 closet_button.addEventListener('click', () => {
