@@ -16,7 +16,7 @@ class ClothesDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename"
@@ -123,7 +123,7 @@ class ClothesDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename",
@@ -175,6 +175,18 @@ class ClothesDao:
             result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "favorite_set.clothes_list": filename_list}]}}})
         
         return result.acknowledged
+    
+    def remove_clothes_from_wardrobe(self, username, filename):
+        result = self.collection.update_one(
+            {"username": username},  
+            {"$pull": {"clothes": {"filename": filename}}}  
+        )
+        
+        if result.modified_count > 0:
+            return True
+        else:
+            return False
+
 
     def __del__(self):
         self.client.close()
