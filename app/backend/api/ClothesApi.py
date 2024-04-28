@@ -61,7 +61,7 @@ def insert_favorite_set(username: str, filename_list:list[str]):
     return service.insert_favorite_set(username, filename_list)
 
 @router.post("/remove-clothes-from-wardrobe")
-def remove_clothes(username: str, filename:str):
+def remove_clothes(username: str = Form(...), filename: str = Form(...)):
     if username is None:
         raise HTTPException(status_code=400, detail="Username is required")
     if filename is None:

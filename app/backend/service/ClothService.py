@@ -1,5 +1,6 @@
 from dao.ClothesDao import ClothesDao
 import utils.Const as const
+import os
 
 class ClothesService:
     def __init__(self):
@@ -45,4 +46,18 @@ class ClothesService:
         return self.dao.insert_favorite_set(username, filename_list)
 
     def remove_clothes_from_wardrobe(self, username, filename):
-        return self.dao.remove_clothes_from_wardrobe(username, filename)
+        path = os.path.join("..", "upload", filename)
+        print(str(path))
+        try:
+            os.remove(path)
+            print("File deleted successfully.")
+            return self.dao.remove_clothes_from_wardrobe(username, filename)
+        except FileNotFoundError:
+            print("Error: File not found.")
+            return False
+        except PermissionError:
+            print("Error: Permission denied.")
+            return False
+        except Exception as e:
+            print(f"Error: {e}")
+            return False
