@@ -104,6 +104,8 @@ options.forEach(option => {
 
 clothestype_dropdown.addEventListener("change", function() {
     selectedValue = clothestype_dropdown.value;
+    choice_list.style.display = 'none';
+    clothesDetail_input.style.display = 'none';
     store_container.innerHTML = "";
     let filterImage = []
     if (selectedValue !== "") {
@@ -132,30 +134,30 @@ clothesDetail_input.addEventListener('click', () => {
     
 });
 
-favorite_button.addEventListener('click', () => {
-    fetch('/favorite_set', { method: 'GET' })
-    .then(response => {
-        if (response.ok) {
-            window.location.href = '/favorite_set';
-        } else {
-            console.error('Error:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
+// favorite_button.addEventListener('click', () => {
+//     fetch('/favorite_set', { method: 'GET' })
+//     .then(response => {
+//         if (response.ok) {
+//             window.location.href = '/favorite_set';
+//         } else {
+//             console.error('Error:', response.statusText);
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// });
 
-store_button.addEventListener('click', () => {
-    fetch('/store', { method: 'GET' })
-    .then(response => {
-        if (response.ok) {
-            window.location.href = '/store';
-        } else {
-            console.error('Error:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
+// store_button.addEventListener('click', () => {
+//     fetch('/store', { method: 'GET' })
+//     .then(response => {
+//         if (response.ok) {
+//             window.location.href = '/store';
+//         } else {
+//             console.error('Error:', response.statusText);
+//         }
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// });
