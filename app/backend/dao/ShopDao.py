@@ -12,8 +12,11 @@ class ShopDao:
         
         return username_list
     
-    def get_all_clothes_info(self):
+    # for explore-outfit & explore-pieces-recommed
+    def get_all_shop_clothes_info(self, username):
         pipeline = [
+            # Exclude clothes associated with the given username
+            {"$match": {"username": {"$ne": username}}},
             {"$unwind": "$clothes"},
             {"$project": {
                 "name": "$clothes.name",
@@ -28,10 +31,15 @@ class ShopDao:
             }}
         ]
         clothes_list = list(self.collection.aggregate(pipeline))
+
         return clothes_list
     
     def get_clothes_info_by_filename(self, filename):
+        if not filename:
+            return None
+
         pipeline = [
+            {"$match": {"clothes.filename": filename}},
             {"$unwind": "$clothes"},
             {"$match": {"clothes.filename": filename}},
             {"$project": {
@@ -43,11 +51,46 @@ class ShopDao:
                 "details": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
-                "filename": "$clothes.filename"
+                "filename": "$clothes.filename",
+                "_id": 0 
             }}
         ]
-        result = list(self.collection.aggregate(pipeline))
-        if result:
-            return result[0]
-        else:
+
+        try:
+            result = list(self.collection.aggregate(pipeline))
+            if result:
+                return result[0]
+            else:
+                return None
+        except Exception as e:
             return None
+        
+    def get_clothes_filename(self, username):
+        pipeline = [
+            {"$match": {"username": username}},
+            {"$unwind": "$clothes"},
+            {"$project": {"filename": "$clothes.filename", "_id": 0}}
+        ]
+        results = list(self.collection.aggregate(pipeline))
+        filename_list = [result['filename'] for result in results if 'filename' in result]
+        return str(filename_list)
+
+    def get_clothes_info(self, username):
+        pipeline = [
+            {"$match": {"username": username}},
+            {"$unwind": "$clothes"},
+            {"$project": {
+                "name": "$clothes.name",
+                "uuid": "$clothes.uuid",
+                "category": "$clothes.category",
+                "gender": "$clothes.gender",
+                "warmth": "$clothes.warmth",
+                "details": "$clothes.detail",
+                "description": "$clothes.description",
+                "occasion": "$clothes.occasion",
+                "filename": "$clothes.filename",
+                "_id": 0
+            }}
+        ]
+        clothes_info_list = list(self.collection.aggregate(pipeline))
+        return clothes_info_list

@@ -40,6 +40,12 @@ def get_style_by_filename(username: str = Form(...), filename: str = Form(...)):
         raise HTTPException(status_code=400, detail="Username & filename is required")
     return {"style": service.get_style_by_filename(username, filename)}
 
+@router.post("/favorite-set")
+def get_favorite_set(username: str = Form(...)):
+    if username is None :
+        raise HTTPException(status_code=400, detail="Username is required")
+    return {"favorite_set": service.get_favorite_set(username)}
+
 @router.post("/clothes-info", deprecated=True)
 def get_all_clothes_info(username: str = Form(...)):
     if username is None:

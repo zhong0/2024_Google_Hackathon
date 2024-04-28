@@ -37,6 +37,9 @@ class ClothesService:
 
     def get_style_by_filename(self, username, filename):
         return self.dao.get_style_by_filename(username, filename)
+    
+    def get_favorite_set(self, username):
+        return self.dao.get_favorite_set(username)
 
     def insert_favorite_set(self, username, filename_list):
         return self.dao.insert_favorite_set(username, filename_list)

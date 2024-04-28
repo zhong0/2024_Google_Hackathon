@@ -120,14 +120,14 @@ class ClothesDao:
             {"$match": {"clothes.filename": filename}},  
             {"$project": {  
                 "name": "$clothes.name",
-                "uuid": "$clothes.uuid",
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
                 "details": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
-                "filename": "$clothes.filename"
+                "filename": "$clothes.filename",
+                "_id": 0
             }}
         ]
         
@@ -169,6 +169,13 @@ class ClothesDao:
             return True
         else:
             return False
+    
+    def get_favorite_set(self, username):
+        user_document = self.collection.find_one({"username": username}, {"favorite_set": 1, "_id": 0})
+        if user_document:
+            return user_document.get('favorite_set', [])
+        else:
+            return []
     
     def insert_favorite_set(self, username, filename_list):
         #currently cannot test by swaggerui
