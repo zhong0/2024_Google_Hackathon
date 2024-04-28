@@ -407,7 +407,7 @@ select {
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 4;
-    height: 450px;
+    height: auto; /* Avoid description text overflow */
     border: 1px solid #ccc;
 }
 
@@ -417,6 +417,7 @@ select {
   display: flex;
   gap: 15px;
   z-index: 4;
+  overflow-x: auto; /* Enable horizontal scrollbar */
 }
 
 .explore-set-tag {
