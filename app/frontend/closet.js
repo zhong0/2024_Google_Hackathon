@@ -77,6 +77,8 @@ options.forEach(option => {
 
 clothestype_dropdown.addEventListener("change", function() {
     selectedValue = clothestype_dropdown.value;
+    choice_list.style.display = 'none';
+    clothesDetail_input.style.display = 'none';
     closet_container.innerHTML = "";
     let filterImage = []
     if (selectedValue !== "") {
