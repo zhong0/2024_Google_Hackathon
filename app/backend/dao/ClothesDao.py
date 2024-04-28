@@ -177,21 +177,21 @@ class ClothesDao:
         else:
             return []
     
-    def insert_favorite_set(self, username, filename_list):
+    def insert_favorite_set(self, username, filename_list, style, description):
         #currently cannot test by swaggerui
         #print(filename_list, len(filename_list))
         clothes_data_ = self.collection.find({"username":username})
         if len(list(clothes_data_)) == 0:
             if self.create_username(username):
                 #clothes_data_ = self.collection.find({"username":username})
-                result = self.collection.update_one({"username":username}, {"$set": {"favorite_set": [{"set_id": 0, "clothes_list": filename_list}]}})
+                result = self.collection.update_one({"username":username}, {"$set": {"favorite_set": [{"set_id": 0, "clothes_list": filename_list, "style": style, "description": description}]}})
             else:
                 return {"error":"can't create new username"}
         else:
             if not self.is_favorite_set_repeated(username, filename_list):
                 result = self.collection.find_one({"username":username})
                 id_offset = len(result.get("favorite_set"))
-                result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "clothes_list": filename_list}]}}})
+                result = self.collection.update_one({"username":username}, {"$push": {"favorite_set": {"$each": [{"set_id":id_offset, "clothes_list": filename_list, "style": style, "description": description}]}}})
             else:
                 return False
         return result.acknowledged

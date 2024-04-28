@@ -41,8 +41,8 @@ class ClothesService:
     def get_favorite_set(self, username):
         return self.dao.get_favorite_set(username)
 
-    def insert_favorite_set(self, username, filename_list):
-        return self.dao.insert_favorite_set(username, filename_list)
+    def insert_favorite_set(self, username, filename_list, style, description):
+        return self.dao.insert_favorite_set(username, filename_list, style, description)
 
     def remove_favorite_set(self, username, filename_list):
         return self.dao.remove_favorite_set(username, filename_list)
