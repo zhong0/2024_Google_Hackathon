@@ -44,11 +44,17 @@ class RecommendService:
         print("result: ", recommend_result)
 
         # update history recommend
-        history_recommend.append(recommend_result["recommend_result"]["recommend_set"])
+        recommend_set = recommend_result["recommend_result"]["recommend_set"]
+        history_recommend.append(recommend_set)
         self.recommend_history_dao.create_history_recommend(username, history_recommend)
 
+        favorite_set_list = self.clothes_dao.get_favorite_set(username)
+
+        # recommend set is favorite set or not
+        recommend_result["recommend_result"]["is_favorite_set"] = self.is_favorite_set(favorite_set_list, recommend_set)
+
         # send result (recommend_set, discription)
-        return recommend_result 
+        return recommend_result
     
     def explore_outfit(self, username, style, recommend_count):
         # get user clothes from wardrobe
@@ -131,6 +137,13 @@ class RecommendService:
             print("Failed to decode JSON from response")
         
         return {}
+    
+    @staticmethod
+    def is_favorite_set(favorite_set_list, recommend_set):
+        for favorite_set in favorite_set_list:
+            if sorted(favorite_set["clothes_list"]) == sorted(recommend_set):
+                return True
+        return False
 
     # for test
     def create_history_recommend(self, username, recommend_set):
