@@ -16,7 +16,7 @@ class ClothesDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename"
@@ -123,7 +123,7 @@ class ClothesDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename",
@@ -195,6 +195,18 @@ class ClothesDao:
             else:
                 return False
         return result.acknowledged
+    
+    def remove_clothes_from_wardrobe(self, username, filename):
+        result = self.collection.update_one(
+            {"username": username},  
+            {"$pull": {"clothes": {"filename": filename}}}  
+        )
+        
+        if result.modified_count > 0:
+            return True
+        else:
+            return False
+
 
     def remove_favorite_set(self, username, filename_list):
         #currently cannot test by swaggerui

@@ -24,7 +24,7 @@ class ShopDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename"
@@ -48,7 +48,7 @@ class ShopDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename",
@@ -85,7 +85,7 @@ class ShopDao:
                 "category": "$clothes.category",
                 "gender": "$clothes.gender",
                 "warmth": "$clothes.warmth",
-                "details": "$clothes.detail",
+                "detail": "$clothes.detail",
                 "description": "$clothes.description",
                 "occasion": "$clothes.occasion",
                 "filename": "$clothes.filename",
@@ -94,3 +94,74 @@ class ShopDao:
         ]
         clothes_info_list = list(self.collection.aggregate(pipeline))
         return clothes_info_list
+    
+    def get_clothes_sale_info_by_filename(self, username, filename):
+        if not filename:
+            return None
+
+        pipeline = [
+            {"$match": {"username": username}},
+            {"$unwind": "$clothes"},
+            {"$match": {"clothes.filename": filename}},
+            {"$project": {
+                "sale_info": "$clothes.sale_info",
+                "_id": 0 
+            }}
+        ]
+
+        try:
+            result = list(self.collection.aggregate(pipeline))
+            if result:
+                return result[0]
+            else:
+                return None
+        except Exception as e:
+            return None
+    
+    def remove_sale_clothes(self, username, filename):
+
+        result = self.collection.update_one(
+            {"username": username}, 
+            {"$pull": {"clothes": {"filename": filename}}}  
+        )
+        
+        if result.modified_count > 0:
+            return True
+        else:
+            return False
+        
+    def clothes_on_sale(self, username, clothes_info):
+        # 首先检查用户是否存在
+        user_exists = self.collection.find_one({"username": username})
+
+        if not user_exists:
+            # 如果用户不存在，插入新用户和其衣物信息
+            new_user_data = {
+                "username": username,
+                "clothes": [clothes_info]
+            }
+            result = self.collection.insert_one(new_user_data)
+        else:
+            # 如果用户已存在，检查指定的 filename 是否已经存在于衣物列表中
+            clothes_exist = self.collection.find_one({
+                "username": username,
+                "clothes": {"$elemMatch": {"filename": clothes_info['filename']}}
+            })
+            
+            if clothes_exist:
+                # 如果衣物已存在，更新这条衣物信息
+                result = self.collection.update_one(
+                    {"username": username, "clothes.filename": clothes_info['filename']},
+                    {"$set": {"clothes.$": clothes_info}}
+                )
+            else:
+                # 如果衣物不存在，添加新的衣物信息到数组
+                result = self.collection.update_one(
+                    {"username": username},
+                    {"$push": {"clothes": clothes_info}}
+                )
+
+        return result.acknowledged
+
+  
+        

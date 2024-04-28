@@ -46,3 +46,6 @@ class ClothesService:
 
     def remove_favorite_set(self, username, filename_list):
         return self.dao.remove_favorite_set(username, filename_list)
+
+    def remove_clothes_from_wardrobe(self, username, filename):
+        return self.dao.remove_clothes_from_wardrobe(username, filename)

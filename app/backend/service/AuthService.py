@@ -28,7 +28,7 @@ class AuthService:
         return len(username) >= 2
 
     # 密碼至少8個字符且包含至少一個數字和一個字母
-    def is_validate_password(password: str) -> bool:
+    def is_validate_password(self, password: str) -> bool:
         # if len(password) < 8:
         #     return False
         # if not re.search("[a-zA-Z]", password):
