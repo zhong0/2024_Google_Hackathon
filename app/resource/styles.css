@@ -644,3 +644,88 @@ select {
     color: white;
     justify-content: center;
 }
+
+
+.closet-user-container {
+    position: absolute;
+    display: flex;
+    background-color: none; /* 背景顏色 */
+    z-index: 4;
+    top: 70px;
+    left: 8%;
+  }
+  
+  .closet-user-circle {
+    width: 100px; /* 圓形直徑 */
+    height: 100px; /* 圓形直徑 */
+    background-color: #FFFFFF; /* 圓形底色 */
+    border-radius: 50%; /* 讓方形變成圓形 */
+    position: relative;
+    overflow: hidden;
+    z-index: 4;
+  }
+  
+  .closet-user-pattern {
+    width: 100px; /* 圖案大小 */
+    height: 100px; /* 圖案大小 */
+    background-image: url('../resource/user_image.png'); /* 圖案路徑 */
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+  }
+
+.closet-user-text {
+    position: absolute;
+    left: 8%;
+    z-index: 4;
+    top: 110px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.clothes-chosen-container {
+    position: absolute;
+    z-index: 4;
+    width: 280px;
+    top: 700px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column; /* 將元素垂直排列 */
+}
+
+.clicked {
+    position: relative;
+    z-index: 5;
+}
+
+.clicked::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+    background-color: rgba(0, 0, 0, 0.5); /* 這裡的 0.5 表示透明度為 50% 的黑色 */
+    pointer-events: none; /* 這樣可以讓鼠標事件穿過覆蓋層，以便點擊到圖片 */
+    z-index: 5;
+}
+
+.username-input {
+    position: absolute;
+    border-radius: 50px;
+    border: 1px solid #000000;
+    padding: 10px; 
+    width: 50%;
+    height: 40px;
+    right: 6%;
+    z-index: 4;
+    font-size: 16pt;
+    justify-content: center;
+    top: 150px;
+}

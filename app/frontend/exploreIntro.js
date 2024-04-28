@@ -2,6 +2,8 @@ const description_container = document.getElementById('set-image');
 const piece_container = document.getElementById('piece-image');
 const tag_container =  document.querySelector('.explore-set-tag-row');
 const text_container = document.getElementById('explore-set-description-text');
+const like_bt = document.getElementById('like-bt');
+const like_label = document.getElementById('like-label');
 
 const data = {
     filename: ['zhong0/02.jpg', 'zhong0/04.jpg'],
@@ -12,6 +14,14 @@ const data = {
 const pieceRecommend = ['zhong0/12.jpg', 'zhong0/13.jpg'];
 
 text_container.textContent = data.description;
+
+like_bt.addEventListener('change', function() {
+    if (this.checked) {
+        like_label.style.backgroundImage = "url('../resource/liked_bt.png')";
+      } else {
+        like_label.style.backgroundImage = "url('../resource/like_bt.png')";
+      }
+});
 
 data.style.forEach((ele) => {
     const tag = document.createElement('div');

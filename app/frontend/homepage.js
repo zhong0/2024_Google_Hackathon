@@ -94,10 +94,10 @@ upload_button.addEventListener('click', () => {
 });
 
 closet_button.addEventListener('click', () => {
-    fetch('/login', { method: 'GET' })
+    fetch('/closet', { method: 'GET' })
         .then(response => {
             if (response.ok) {
-                window.location.href = '/login';
+                window.location.href = '/closet';
             } else {
                 console.error('Error:', response.statusText);
             }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOTDAI</title>
+    <link rel="stylesheet" type="text/css" href="../resource/styles.css">
+</head>
+<body>
+    <!-- background -->
+    <div class="explore-image-container">
+        <img src="../resource/explore_bkg.jpg" alt="explore">
+    </div>
+    <div class="rounded-rectangle"></div>
+
+     <!-- user info -->
+     <div>
+        <div class="closet-user-container">
+            <div class="closet-user-circle">
+            <div class="closet-user-pattern"></div>
+        </div>
+        <div id="username-text" class="closet-user-text">zhong0</div>
+    </div>
+
+    <!-- search -->
+    <input id="username-input" type="text" class="username-input" placeholder="username">
+    <div class="search-button" style="top: 155px; right: 8%">
+        <img id = "search-bt" style = " max-width: 50px; height: auto;" src="../resource/search_bt.png" alt="search">
+    </div>
+
+    <div class="text-explore">
+        <img style = " max-width: 120px; height: auto;" src="../resource/favorite_word.png" alt="recommend">
+    </div>
+
+    <!-- Set Card View -->
+    <div id = "favorite-set-container" class="explore-set-container"></div>
+    <script src="../frontend/favoriteSet.js"></script>
+</body>
+</html>

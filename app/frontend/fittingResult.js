@@ -76,7 +76,7 @@ toggleBtn.addEventListener('click', function() {
             });
         toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
       }
-    });
+});
 
 
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOTDAI</title>
+    <link rel="stylesheet" type="text/css" href="../resource/styles.css">
+</head>
+<body>
+    <!-- background -->
+    <div class="explore-image-container">
+        <img src="../resource/explore_bkg.jpg" alt="explore">
+    </div>
+    <div class="rounded-rectangle"></div>
+
+     <!-- search -->
+     <input id="username-input" type="text" class="username-input" placeholder="username">
+     <div class="search-button" style="top: 155px; right: 8%">
+         <img id = "search-bt" style = " max-width: 50px; height: auto;" src="../resource/search_bt.png" alt="search">
+     </div>
+
+
+    <!-- user info -->
+    <div>
+        <div class="closet-user-container">
+            <div class="closet-user-circle">
+            <div class="closet-user-pattern"></div>
+        </div>
+        <div class="closet-user-text">zhong0</div>
+    </div>
+
+     <!-- closet -->
+     <div class="text-explore">
+        <img style = " max-width: 100px; height: auto;" src="../resource/store_word.png" alt="explore">
+    </div>
+
+    <select id="clothestype-dropdown" style="width: 300px;">
+        <option value="" selected>Please select an option</option>
+    </select>
+
+    <div id="store-container" class="explore-piece-image-gallery" style="top: 400px"></div>
+
+    <div id="choice-list" class="clothes-chosen-container" style="display: none;">
+        <img id = "remove-bt" style="width: 280px;" src="../resource/store_delete_word.png" alt="delete">
+        <img id = "modification-bt" style="width: 280px;" src="../resource/modification_bt.png" alt="add">
+        <div id = "add-store-detail" style="display: none">
+            <p class="piece-title">Price</p>
+            <input id="price-input" type="number" class="input-text" style="width: 280px; margin-top: 0;">
+            <p class="piece-title">Size</p>
+            <input id="size-input" type="text" class="input-text" style="width: 280px; margin-top: 0;">
+            <p class="piece-title">Brand</p>
+            <input id="brand-input" type="text" class="input-text" style="width: 280px; margin-top: 0;">
+            <p class="piece-title">Details</p>
+            <input id="detail-input" type="text" class="input-text" style="width: 280px; margin-top: 0;">
+            <img id = "submit-bt" style="width: 280px; margin-top: 10px;" src="../resource/submit_bt.png" alt="sell">
+        </div>
+    </div>
+
+    <script src="../frontend/store.js"></script>
+</body>
+</html>
