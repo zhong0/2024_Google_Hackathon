@@ -23,7 +23,7 @@ def build_recommend_query(clothes, style, occasion, specific_clothes, history_re
 
     query_parts.append("Recommend the most suitable outfit.")
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
-    query_parts.append("{\"recommend_result\": {\"recommend_set\": [\"clothes_file_name_1\", \"clothes_file_name_2\"],\"description\": \"......\"}}")
+    query_parts.append("{\"recommend_result\": {\"recommend_set\": [\"clothes_file_name_1\", \"clothes_file_name_2\"],\"description\": \"......\",\"style\": [\"style_1\", \"style_2\"]}}")
     query_parts.append("Recommended outfits must be complete ensembles.")
     query_parts.append("Recommended outfits set must be wearable at the same time.")
     query_parts.append("Descriptions must not mention the filename.")

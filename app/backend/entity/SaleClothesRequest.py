@@ -10,7 +10,7 @@ class SaleClothesRequest(BaseModel):
 
     @field_validator('price')
     def check_price(cls, value):
-        if value <= 0:
+        if value < 0:
             raise ValueError("Price must be greater than 0")
         return value
     
