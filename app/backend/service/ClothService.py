@@ -49,7 +49,7 @@ class ClothesService:
         return self.dao.remove_favorite_set(username, filename_list)
 
     def remove_clothes_from_wardrobe(self, username, filename):
-        path = os.path.join("..", "upload", filename)
+        path = os.path.join(".", "upload", filename)
         print(str(path))
         try:
             os.remove(path)

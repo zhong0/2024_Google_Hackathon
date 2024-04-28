@@ -11,11 +11,12 @@ console.log('specific_clothes:', JSON.parse(localStorage.getItem('specific_cloth
 
 // from API
 /*let imageListData = [
-    { id: 1, filename: "../upload/zhong0/01.jpg", "chosen": false, 'category': 'Bottom'},
-    { id: 2, filename: "../upload/zhong0/04.jpg", "chosen": false, 'category': 'Top'},
+    { id: 1, filename: "zhong0/01.jpg", "chosen": false, 'category': 'Bottom'},
+    { id: 2, filename: "zhong0/04.jpg", "chosen": false, 'category': 'Top'},
 ];*/
 let imageListData = [];
-let descrption = "This is a casual style."
+let description = "This is a casual style."
+let style = [];
 
 
 
@@ -25,8 +26,12 @@ toggleBtn.addEventListener('click', function() {
         //prepare FormData
         const form_data = new FormData();
         form_data.append('username', 'chiPi_data');
+        form_data.append('description', description);
+        style.forEach(ele =>{
+            form_data.append('style', ele);
+        });
         imageListData.forEach(image_data=>{
-            form_data.append('filename_list', image_data.filename.replace("../upload/", ""));
+            form_data.append('filename_list', image_data.filename);
         });
         
         const request_options = {
@@ -47,13 +52,12 @@ toggleBtn.addEventListener('click', function() {
             .catch(error => {
                 console.error('Fetch error:', error);
             });
-        toggleLabel.style.backgroundImage = "url('../resource/liked_bt.png')";
       } else {
         //delete favorite set
         const form_data = new FormData();
         form_data.append('username', 'chiPi_data');
         imageListData.forEach(image_data=>{
-            form_data.append('filename_list', image_data.filename.replace("../upload/", ""));
+            form_data.append('filename_list', image_data.filename);
         });
         
         const request_options = {
@@ -74,8 +78,16 @@ toggleBtn.addEventListener('click', function() {
             .catch(error => {
                 console.error('Fetch error:', error);
             });
-        toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
       }
+});
+
+toggleBtn.addEventListener('change', (event)=>{
+    let is_checked = event.target.checked;
+    if(is_checked){
+        toggleLabel.style.backgroundImage = "url('../resource/liked_bt.png')";
+    } else {
+        toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
+    }
 });
 
 
@@ -115,85 +127,18 @@ refresh_button.addEventListener('click', ()=>{
     //reset like-btn
     toggleBtn.checked = false;
     console.log(toggleBtn.checked)
-    toggleLabel.style.backgroundImage = "url('../resource/like_bt.png')";
 
-    const payload_data = {
-        username: 'chiPi_data',
-        style: JSON.parse(localStorage.getItem('styleToggleSelected')),
-        occasion: JSON.parse(localStorage.getItem('occasionToggleSelected')),
-        specific_clothes: JSON.parse(localStorage.getItem('specific_clothes')),
-        isRefresh: true
-    }
 
-    const request_options = {
-        method:'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(payload_data)
-    }
-
-    fetch('/recommend/recommend-by-text', request_options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            let idex = 1;
-            let file_path = '../upload/';
-            console.log(data.recommend_result)
-            //set imageListData
-            let filenames = data.recommend_result['recommend_set'];
-            filenames.forEach( (filename) =>{
-                imageListData.push({ id: idex, filename: file_path+filename});
-                idex += 1;
-            });
-            imageListData.forEach(function(imageSrc) {
-                const imageContainer = document.createElement("div");
-                imageContainer.className = "image-scroll-container";
-                
-                const imageElement = document.createElement("img");
-                imageElement.src = imageSrc.filename;
-                imageElement.alt = "Image";
-                imageElement.id = imageSrc.id;
-                imageElement.style.height = '200px';
-                imageContainer.appendChild(imageElement);
-                    
-                recommend_container.appendChild(imageContainer);
-            });
-            descrption = data.recommend_result['description'];
-            description_text.textContent = descrption;
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
+    fetch_recommend(true);
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    /*const form_data = new FormData();
-    form_data.append('username', 'chiPi_data');
-
-    JSON.parse(localStorage.getItem('styleToggleSelected')).forEach(style_selected =>{
-        console.log(style_selected);
-        form_data.append('style', style_selected);
-    });
-    JSON.parse(localStorage.getItem('occasionToggleSelected')).forEach(occasion_selected =>{
-        console.log(occasion_selected);
-        form_data.append('occasion', occasion_selected);
-    });
-    JSON.parse(localStorage.getItem('specific_clothes')).forEach(clothes_selected =>{
-        console.log(clothes_selected);
-        form_data.append('specific_clothes', clothes_selected);
-    });*/
-
+function fetch_recommend(isRefresh){
     const payload_data = {
         username: 'chiPi_data',
         style: JSON.parse(localStorage.getItem('styleToggleSelected')),
         occasion: JSON.parse(localStorage.getItem('occasionToggleSelected')),
         specific_clothes: JSON.parse(localStorage.getItem('specific_clothes')),
-        isRefresh: false
+        isRefresh: isRefresh
     }
 
     const request_options = {
@@ -218,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
             //set imageListData
             let filenames = data.recommend_result['recommend_set'];
             filenames.forEach( (filename) =>{
-                imageListData.push({ id: idex, filename: file_path+filename});
+                imageListData.push({ id: idex, filename: filename});
                 idex += 1;
             });
             imageListData.forEach(function(imageSrc) {
@@ -226,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 imageContainer.className = "image-scroll-container";
                 
                 const imageElement = document.createElement("img");
-                imageElement.src = imageSrc.filename;
+                imageElement.src = file_path+imageSrc.filename;
                 imageElement.alt = "Image";
                 imageElement.id = imageSrc.id;
                 imageElement.style.height = '200px';
@@ -234,10 +179,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                 recommend_container.appendChild(imageContainer);
             });
-            descrption = data.recommend_result['description'];
-            description_text.textContent = descrption;
+            //set style
+            style = data.recommend_result['style'];
+            //set description text
+            description = data.recommend_result['description'];
+            description_text.textContent = description;
+            //check is already in favorite set
+            if(data.recommend_result['is_favorite_set']==false){
+                toggleBtn.checked = false;
+            } else {
+                toggleBtn.checked = true;
+            }
         })
         .catch(error => {
             console.error('Fetch error:', error);
         });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    fetch_recommend(false);
+    
 });
