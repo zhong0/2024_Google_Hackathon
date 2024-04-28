@@ -53,7 +53,7 @@ body {
 
 .rounded-rectangle {
     position: absolute;
-    top: 245px;
+    top: 215px;
     left: 0;
     width: 100%;
     height: 100vh;
@@ -66,7 +66,7 @@ body {
 .text-hello {
     z-index: 3;
     position: absolute;
-    top: 100px;
+    top: 65px;
     left: 8%;
     font-size: 20pt;
     font-family: 'Times New Roman', Times, serif;
@@ -77,7 +77,7 @@ body {
     justify-content: left;
     width: 90%;
     z-index: 3;
-    top: 610px;
+    top: 590px;
     left: 8%;
     z-index: 4;
 }
@@ -88,7 +88,7 @@ body {
     width: 100%;
     z-index: 3;
     position: absolute;
-    top: 120px;
+    top: 90px;
     z-index: 4;
 }
 
@@ -107,7 +107,7 @@ body {
     width: 100%;
     z-index: 3;
     position: absolute;
-    top:265px;
+    top:240px;
     z-index: 4;
 }
 
@@ -117,7 +117,6 @@ body {
     width: 90%;
     left: 8%;
     z-index: 4;
-    
 }
 
 /** 按鈕 **/
@@ -125,7 +124,7 @@ body {
 .fitting-button {
     z-index: 4;
     position: absolute;
-    top: 180px;
+    top: 140px;
     left: 6%;
     border: none;
     background: none;
@@ -133,7 +132,7 @@ body {
 .home-button {
     z-index: 4;
     position: absolute;
-    top: 263px;
+    top: 235px;
     left: 6%;
     border: none;
     background: none;
@@ -142,28 +141,28 @@ body {
 .selfclothes-button {
     z-index: 4;
     position: absolute;
-    top: 180px;
+    top: 145px;
     right: 80px;
 }
 
 .search-button {
     z-index: 4;
     position: absolute;
-    top: 135px;
-    right: 65px;
+    margin-left:250px;
+    margin-top: 3px;
 }
 
 .upload-button {
     z-index: 4;
     position: absolute;
-    top: 180px;
+    top: 145px;
     right: 25px;
 }
 
 .refresh-button {
     z-index: 4;
     position: absolute;
-    top: 266px;
+    top: 235px;
     right: 6%;
 }
 
@@ -175,10 +174,10 @@ body {
 
 .explore-button-container {
     position: absolute; 
-    top: 320px;
+    top: 300px;
     left: 50%;
     transform: translate(-50%, 0);
-    width: 350px;
+    width: 330px;
     height: auto;
     z-index: 4;
 }
@@ -217,7 +216,7 @@ body {
 .next-button {
     z-index: 3;
     position: absolute;
-    top: 270px;
+    top: 235px;
     right: 6%;
     border: none;
     background: none;
@@ -228,7 +227,7 @@ body {
     border-radius: 10px;
     border: 1px solid #000000;
     padding: 8px; 
-    width: 300px;
+    width: 240px;
     height: 40px;
     z-index: 4;
     font-size: 14pt;
@@ -256,7 +255,7 @@ body {
     display: flex;
     flex-wrap: wrap; /* 換行 */
     gap: 8px;
-    width: 360px;
+    width: 300px;
     height: 125px;
     padding: 10px;
     border: 1px solid #000000; 
@@ -298,7 +297,7 @@ body {
     display: inline-block;
     width: 40px;
     height: 40px;
-    top: 263px;
+    top: 235px;
     right: 18%;
     background-image: url('./like_bt.png');
     background-size: cover;
@@ -326,7 +325,7 @@ select {
 
 /* 選衣服圖片橫式滑動 */
 .image-scroll-container-wrapper {
-    width: 400px;
+    width: 320px;
     left: 8%;
     position: absolute;
     overflow-x: auto;
@@ -371,6 +370,9 @@ select {
     text-align: left; /* 文字對齊方式 */
     text-decoration: none; /* 文字下劃線 */
     z-index: 4;
+    width: 320px;
+    overflow-y: auto; /* Enable vertical scrollbar */
+    height: 200px;
   }
 
 
@@ -443,7 +445,7 @@ select {
 .explore-description-image-gallery {
     position: absolute;
     z-index: 4;
-    width: 360px;
+    width: 320px;
     left: 8%;
     top: 485px;
     /* margin-top: 80px; */
@@ -479,14 +481,14 @@ select {
 .explore-piece-image-gallery {
     position: absolute;
     z-index: 4;
-    width: 360px;
+    width: 320px;
+    top: 830px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     left: 8%;
-    top: 850px;
-    display: flex; /* Make images display horizontally */
-    overflow-x: auto; /* Enable horizontal scrollbar */
-    scroll-snap-type: x mandatory; /* Enable snapping */
-    left: 50%;
-    transform: translate(-50%, 0);
+    /* left: 50%;
+    transform: translate(-50%, 0); */
 }
   
 .explore-piece-image-gallery img {
@@ -651,7 +653,7 @@ select {
     display: flex;
     background-color: none; /* 背景顏色 */
     z-index: 4;
-    top: 70px;
+    top: 60px;
     left: 8%;
   }
   
@@ -681,18 +683,59 @@ select {
     position: absolute;
     left: 8%;
     z-index: 4;
-    top: 110px;
+    top: 105px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 18pt;
     font-weight: bold;
     color: #FFFFFF;
 }
 
+.favorite-user-container {
+    position: absolute;
+    display: flex;
+    background-color: none; /* 背景顏色 */
+    z-index: 4;
+    top: 20px;
+    justify-content: center;
+    width: 100%;
+    left: 50%; 
+    transform: translate(-50%, 0 );
+  }
+  
+  .favorite-user-circle {
+    width: 90px; /* 圓形直徑 */
+    height: 90px; /* 圓形直徑 */
+    background-color: #FFFFFF; /* 圓形底色 */
+    border-radius: 50%; /* 讓方形變成圓形 */
+    position: relative;
+    overflow: hidden;
+    z-index: 4;
+  }
+  
+  .favorite-user-pattern {
+    width: 90px; /* 圖案大小 */
+    height: 90px; /* 圖案大小 */
+    background-image: url('../resource/user_image.png'); /* 圖案路徑 */
+    background-size: cover;
+    position: absolute;
+    z-index: 4;
+  }
+
+.favorite-user-text {
+    position: absolute;
+    z-index: 4;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-top: 90px;
+}
+
 .clothes-chosen-container {
     position: absolute;
     z-index: 4;
     width: 280px;
-    top: 700px;
+    top: 680px;
     left: 50%;
     transform: translate(-50%, 0);
     display: flex;
@@ -716,16 +759,13 @@ select {
     z-index: 5;
 }
 
-.username-input {
+.search-bar {
     position: absolute;
-    border-radius: 50px;
-    border: 1px solid #000000;
-    padding: 10px; 
-    width: 50%;
-    height: 40px;
-    right: 6%;
+    display: flex;
+    flex-direction: row;
     z-index: 4;
-    font-size: 16pt;
     justify-content: center;
-    top: 150px;
+    left: 50%;
+    top: 120px;
+    transform: translate(-50%, 0);
 }

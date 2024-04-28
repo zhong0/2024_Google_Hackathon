@@ -9,7 +9,7 @@ let imageListData = [
     { id: 1, filename: "../upload/zhong0/01.jpg", "chosen": false, 'category': 'Bottom'},
     { id: 2, filename: "../upload/zhong0/04.jpg", "chosen": false, 'category': 'Top'},
 ];
-let descrption = "This is a casual style."
+let descrption = "This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style.This is a casual style."
 
 
 description_text.textContent = descrption;
