@@ -13,6 +13,25 @@ const data = [
 console.log('username:', localStorage.getItem('username'));
 //localStorage.removeItem('username');
 
+function showMessage(message) {
+    const alertBox = document.createElement('div');
+    alertBox.textContent = message;
+    alertBox.style.backgroundColor = '#000000';
+    alertBox.style.color = 'white';
+    alertBox.style.padding = '10px 20px';
+    alertBox.style.borderRadius = '10px';
+    alertBox.style.position = 'fixed';
+    alertBox.style.top = '50%';
+    alertBox.style.left = '50%';
+    alertBox.style.transform = 'translate(-50%, -50%)';
+    alertBox.style.zIndex = '9999';
+
+    document.body.appendChild(alertBox);
+
+    setTimeout(function() {
+        document.body.removeChild(alertBox);
+    }, 2000); // 2秒后移除提示框
+}
 
 data.forEach((ele) => {
     const imageWrapper = document.createElement('div');

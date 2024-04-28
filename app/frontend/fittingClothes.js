@@ -3,7 +3,9 @@ const clothestype_dropdown = document.getElementById("clothestype-dropdown");
 const pickclothes_container = document.getElementById("pickclothes-scroll-container-wrapper");
 const chosen_container = document.getElementById("chosen-scroll-container-wrapper");
 const next_button = document.getElementById("next-bt");
+const loading_container = document.getElementById('loading');
 
+loading_container.style.display = 'flex';
 
 
 // 從 API 拿
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 optionElement.value = option;
                 clothestype_dropdown.appendChild(optionElement);
             });
+            loading_container.style.display = 'none';
         })
         .catch(error => {
             console.error('Fetch error:', error);

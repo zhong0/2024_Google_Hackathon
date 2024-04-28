@@ -4,6 +4,9 @@ const recommend_container = document.getElementById("recommend-scroll-container-
 const description_text = document.getElementById("description-text");
 const home_button = document.getElementById("home-bt");
 const refresh_button = document.getElementById("refresh-bt");
+const loading_container = document.getElementById('loading');
+
+loading_container.style.display = 'flex';
 
 console.log('styleToggle:', JSON.parse(localStorage.getItem('styleToggleSelected')))
 console.log('occasionToggle:', JSON.parse(localStorage.getItem('occasionToggleSelected')))
@@ -16,7 +19,6 @@ console.log('specific_clothes:', JSON.parse(localStorage.getItem('specific_cloth
 ];*/
 let imageListData = [];
 let descrption = "This is a casual style."
-
 
 
 toggleBtn.addEventListener('click', function() {
@@ -107,6 +109,7 @@ function remove_all_child_in_scroll_container_wrapper(){
 }
 
 refresh_button.addEventListener('click', ()=>{
+    loading_container.style.display = 'flex';
     console.log('refreshing...')
     //clean imageListData
     imageListData.length = 0;
@@ -165,6 +168,7 @@ refresh_button.addEventListener('click', ()=>{
             });
             descrption = data.recommend_result['description'];
             description_text.textContent = descrption;
+            loading_container.style.display = 'none';
         })
         .catch(error => {
             console.error('Fetch error:', error);
@@ -236,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             descrption = data.recommend_result['description'];
             description_text.textContent = descrption;
+            loading_container.style.display = 'none';
         })
         .catch(error => {
             console.error('Fetch error:', error);
