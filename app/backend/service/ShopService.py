@@ -1,6 +1,7 @@
 from ..dao.ShopDao import ShopDao
 from ..dao.ClothesDao import ClothesDao
 from ..utils import Const as const
+import random
 
 class ShopService:
     def __init__(self):
@@ -80,4 +81,6 @@ class ShopService:
         return category_files
 
     def get_all_user_filename(self):
-        return self.shop_dao.get_all_user_filename()
+        filename = self.shop_dao.get_all_user_filename()
+        random.shuffle(filename)
+        return filename[:25]
