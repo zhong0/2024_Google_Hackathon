@@ -13,15 +13,21 @@ const brand_input = document.getElementById('brand-input');
 const details_input = document.getElementById('detail-input');
 const sell_button = document.getElementById('add-to-sell');
 
-const username = 'zhong0'; //localStorage.getItem('username');
+let username = '';
 const loading_container = document.getElementById('loading');
-
 
 let selectedImage = null;
 let previousSelected = null;
 let options = [];
 let imageListData = [];
-username_text.textContent = username;
+
+// page init - get all clothes
+document.addEventListener('DOMContentLoaded', function() {
+    console.log(localStorage.getItem('username'))
+    username = localStorage.getItem('username');
+    username_text.textContent = username;
+    getAllClothes();
+});
 
 function createInitOptions() {
     const option = document.createElement('option');
@@ -228,13 +234,6 @@ sell_button.addEventListener('click', () => {
 
 });
 
-
-// page init - get all clothes
-document.addEventListener('DOMContentLoaded', function() {
-    getAllClothes();
-});
-
-
 // go to favorite set page
 favorite_button.addEventListener('click', () => {
     fetch('/favorite_set', { method: 'GET' })
@@ -252,6 +251,7 @@ favorite_button.addEventListener('click', () => {
 
 // go to store page
 store_button.addEventListener('click', () => {
+    localStorage.setItem('search_username', username);
     fetch('/store', { method: 'GET' })
     .then(response => {
         if (response.ok) {
