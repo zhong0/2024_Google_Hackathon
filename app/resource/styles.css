@@ -73,12 +73,6 @@ body {
 }
 
 .text-piece {
-    position: absolute;
-    justify-content: left;
-    width: 90%;
-    z-index: 3;
-    top: 590px;
-    left: 8%;
     z-index: 4;
 }
 
@@ -102,21 +96,13 @@ body {
 }
 
 .text-explore {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    z-index: 3;
-    position: absolute;
-    top:240px;
+    position:absolute;
     z-index: 4;
 }
 
 .text-style {
     position: absolute;
     justify-content: left;
-    width: 90%;
-    left: 8%;
-    z-index: 4;
 }
 
 /** 按鈕 **/
@@ -167,16 +153,12 @@ body {
 }
 
 .add-button {
-    z-index: 4;
     border: none;
     background: none;
 }
 
 .explore-button-container {
     position: absolute; 
-    top: 300px;
-    left: 50%;
-    transform: translate(-50%, 0);
     width: 330px;
     height: auto;
     z-index: 4;
@@ -214,7 +196,7 @@ body {
 }
 
 .next-button {
-    z-index: 3;
+    z-index: 5;
     position: absolute;
     top: 235px;
     right: 6%;
@@ -231,7 +213,6 @@ body {
     height: 40px;
     z-index: 4;
     font-size: 14pt;
-    margin-top: 10px;
 }
 
 .explore-input {
@@ -251,16 +232,14 @@ body {
 /* toggle button */
 .toggle-container {
     position: absolute;
-    left: 8%;
     display: flex;
     flex-wrap: wrap; /* 換行 */
     gap: 8px;
-    width: 300px;
+    width: 317px;
     height: 125px;
     padding: 10px;
     border: 1px solid #000000; 
     border-radius: 10px;
-    z-index: 4;
     justify-content: center;
     overflow-y: auto;
     flex-direction: row;
@@ -293,7 +272,7 @@ body {
 
 .like-toggle-label {
     position: absolute;
-    z-index: 4;
+    z-index: 5;
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -314,36 +293,29 @@ select {
     position: absolute;
     border-radius: 10px;
     padding: 8px;
-    top: 345px;
-    z-index: 4;
-    left: 8%;
     border: 1px solid #000000;
     font-size: 14pt;
     font-family: 'Times New Roman', Times, serif;
-    width: 400px;
+    width: 320px;
 }
 
 /* 選衣服圖片橫式滑動 */
 .image-scroll-container-wrapper {
     width: 320px;
-    left: 8%;
     position: absolute;
     overflow-x: auto;
     white-space: nowrap;
-    z-index: 4;
 }
 
 .image-scroll-container {
     display: inline-block; /* 将图像容器作为内联块元素显示 */
     position: relative; /* 设置相对定位，用于绝对定位遮罩层 */
     margin-right: 10px; /* 图片容器之间的间距 */
-    z-index: 4;
 }
 /* 图片样式 */
 .image-scroll-container img {
     width: auto; /* 图片宽度最大为容器宽度 */
     height: 180px; /* 自动计算图片高度，保持比例 */
-    z-index: 4;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -360,8 +332,6 @@ select {
 
 .description-text {
     position: absolute;
-    top: 610px;
-    left: 8%;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px; /* 字體大小 */
     font-weight: normal; /* 字體粗細 */
@@ -369,7 +339,6 @@ select {
     line-height: 1.5; /* 行高 */
     text-align: left; /* 文字對齊方式 */
     text-decoration: none; /* 文字下劃線 */
-    z-index: 4;
     width: 320px;
     overflow-y: auto; /* Enable vertical scrollbar */
     height: 200px;
@@ -379,9 +348,8 @@ select {
 /* explore */
 .explore-set-container {
     position: absolute;
-    top: 320px;
-    left: 8%;
-    width: 350px;
+    top: 300px;
+    width: 330px;
     /*max-height: 300px; /* Set maximum height */
     overflow-y: auto; /* Enable vertical scrollbar */
     z-index: 4;
@@ -415,7 +383,6 @@ select {
 
 
 .explore-set-tag-row {
-  margin-top: 15px;
   display: flex;
   gap: 15px;
   z-index: 4;
@@ -447,8 +414,6 @@ select {
     position: absolute;
     z-index: 4;
     width: 320px;
-    left: 8%;
-    top: 485px;
     /* margin-top: 80px; */
     display: flex; /* Make images display horizontally */
     overflow-x: auto; /* Enable horizontal scrollbar */
@@ -481,13 +446,10 @@ select {
 
 .explore-piece-image-gallery {
     position: absolute;
-    z-index: 4;
     width: 320px;
-    top: 830px;
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    left: 8%;
     /* left: 50%;
     transform: translate(-50%, 0); */
 }
@@ -608,18 +570,14 @@ select {
 .style-container {
     position: absolute;
     display: flex;
-    left: 8%;
 }
 
 .login-container {
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: column; /* 將元素垂直排列 */
     width: 300px;
-    top:350px;
     z-index: 4;
-    left: 50%;
-    transform: translate(-50%, 0);
 }
 
 .account-input-text {
@@ -736,7 +694,7 @@ select {
     position: absolute;
     z-index: 4;
     width: 280px;
-    top: 680px;
+    top: 630px;
     left: 50%;
     transform: translate(-50%, 0);
     display: flex;
@@ -805,4 +763,23 @@ select {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.center-container {
+    top: 230px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+}
+
+.text-title-outside-center-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 3;
+    position: absolute;
+    top: 240px;
 }
