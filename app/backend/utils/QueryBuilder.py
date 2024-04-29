@@ -44,7 +44,7 @@ def build_explore_query(user_clothes, shop_clothes, style, recommend_count):
         query_parts.append(str(style))
 
     query_parts.append("Recommend as more as possible suitable outfits.")
-    query_parts.append("the limitaion of outfits is" + str(recommend_count))
+    query_parts.append("the limitaion of outfits is " + str(recommend_count))
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
     
     recommendations = [
@@ -84,7 +84,7 @@ def build_explore_pieces_recommend(user_clothes, shop_clothes, style, specific_c
         query_parts.append(str(style))
 
     query_parts.append("Recommend as more as possible suitable clothes outfit for each specific clothes.")
-    query_parts.append("the limitaion of outfits is" + str(recommend_count))
+    query_parts.append("the limitaion of outfits is " + str(recommend_count))
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
 
     recommend_results = {
