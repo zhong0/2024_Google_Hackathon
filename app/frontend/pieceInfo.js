@@ -9,11 +9,15 @@ const user_button = document.getElementById('user-bt');
 const loading_container = document.getElementById('loading');
 
 // from API
-const search_piece_clothes_filename = localStorage.getItem('search_piece_clothes_filename');
-const search_username = search_piece_clothes_filename.split("/")[0]
+let search_piece_clothes_filename;
+let search_username;
 
 document.addEventListener('DOMContentLoaded', function() {
     loading_container.style.display = 'flex';
+    search_piece_clothes_filename = localStorage.getItem('search_piece_clothes_filename');
+    search_username = search_piece_clothes_filename.split("/")[0];
+    localStorage.setItem('search_piece_clothes_filename', '');
+
     const form_data = new FormData();
     form_data.append('username', search_username);
     form_data.append('filename', search_piece_clothes_filename);

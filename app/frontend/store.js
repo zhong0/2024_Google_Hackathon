@@ -18,8 +18,8 @@ let detail_input = document.getElementById('detail-input');
 
 const loading_container = document.getElementById('loading');
 
-// myUsername from localStorage; nowUsername from api
-const myUsername = localStorage.getItem('username');
+let myUsername = ''
+let search_piece_clothes_filename = '';
 let searchUsername = '';
 
 let selectedImage = null;
@@ -28,49 +28,19 @@ let previousSelected = null;
 let imageListData = [];
 let options = [];
 
-// init dropdown options
-function createInitOptions() {
-    const option = document.createElement('option');
-    option.value = '';
-    option.text = 'Please select an option';
-    option.selected = true;
-
-    clothestype_dropdown.appendChild(option);
-}
-
-// get original sale information of clothe
-function getSaleInfo() {
-    loading_container.style.display = 'flex';
-    const form_data = new FormData();
-    const filename = `${myUsername}/${selectedImage.src.split("/").slice(-1)[0]}`;
-    form_data.append('username', searchUsername);
-    form_data.append('filename', filename);
-
-    const request_options = {
-        method:'POST',
-        body:form_data
+// page init - get all clothes
+document.addEventListener('DOMContentLoaded', function() {
+    myUsername = localStorage.getItem('username');
+    search_piece_clothes_filename = localStorage.getItem('search_piece_clothes_filename');
+    localStorage.setItem('search_piece_clothes_filename', '');
+    if (searchUsername == '') {
+        searchUsername = myUsername;
+    } else {
+        searchUsername = searchUsername;
     }
-    
-    fetch('/shop/clothes-sale-info-by-filename', request_options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            price_input.value = data.sale_info.price;
-            size_input.value = data.sale_info.size;
-            brand_input.value = data.sale_info.brand;
-            detail_input.value = data.sale_info.owner_description;
-            loading_container.style.display = 'none';
-            
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
-
-}
+    searched_username_text.textContent = searchUsername;
+    getSellClothes();
+});
 
 // get all clothes on sale
 function getSellClothes() {
@@ -83,6 +53,7 @@ function getSellClothes() {
         body:form_data
     }
     
+    // dropdown category & file display
     fetch('/shop/file-path-group-by-category', request_options)
         .then(response => {
             if (!response.ok) {
@@ -127,6 +98,39 @@ function getSellClothes() {
         .catch(error => {
             console.error('Fetch error:', error);
         });
+}
+
+// get selected clothe
+function clotheChosen(imageList) {
+    imageList.forEach((ele) => {
+        const imageWrapper = document.createElement('div');
+        imageWrapper.classList.add('image-wrapper');
+        // 創建 img 元素
+        const img = document.createElement('img');
+        img.src = `../upload/${ele.filename}`; // 圖片路徑根據索引 i 設置
+        img.id = ele.id;
+        img.alt = 'Image ' + ele.id;
+
+        // from homepage chose his clothes
+        if(ele.filename.split('/').slice(2).join('/') === search_piece_clothes_filename) {
+            showPieceInfo(imageWrapper, img);
+            search_piece_clothes_filename = '';
+        }
+    
+        img.addEventListener('mouseover', function() {
+            imageWrapper.classList.add('hovered');
+        });
+        img.addEventListener('mouseout', function() {
+            imageWrapper.classList.remove('hovered');
+        });
+        img.addEventListener('click', function() {
+            showPieceInfo(imageWrapper, img);
+        });
+
+        imageWrapper.appendChild(img);
+        store_container.appendChild(imageWrapper);
+    })
+
 }
 
 // identifty the next step
@@ -199,34 +203,14 @@ function showPieceInfo (imageWrapper, img) {
     }
 }
 
-// get selected clothe
-function clotheChosen(imageList) {
-    imageList.forEach((ele) => {
-        const imageWrapper = document.createElement('div');
-        imageWrapper.classList.add('image-wrapper');
-        // 創建 img 元素
-        const img = document.createElement('img');
-        img.src = `../upload/${ele.filename}`; // 圖片路徑根據索引 i 設置
-        img.id = ele.id;
-        img.alt = 'Image ' + ele.id;
-    
-        // 添加 hover 效果
-        img.addEventListener('mouseover', function() {
-            imageWrapper.classList.add('hovered');
-        });
-        img.addEventListener('mouseout', function() {
-            imageWrapper.classList.remove('hovered');
-        });
-    
-        img.addEventListener('click', function() {
-            showPieceInfo(imageWrapper, img);
-        });
-        // 將 input、label 和 img 元素添加到 imageWrapper 中
-        imageWrapper.appendChild(img);
-        // 將 imageWrapper 添加到父容器中
-        store_container.appendChild(imageWrapper);
-    })
+// init dropdown options
+function createInitOptions() {
+    const option = document.createElement('option');
+    option.value = '';
+    option.text = 'Please select an option';
+    option.selected = true;
 
+    clothestype_dropdown.appendChild(option);
 }
 
 // dropdown change
@@ -244,6 +228,51 @@ clothestype_dropdown.addEventListener("change", function() {
     clotheChosen(filterImage)
     
 });
+
+// expect to modifying
+modification_button.addEventListener('click', () => {
+    if(clothesDetail_container.style.display === 'none') {
+        clothesDetail_container.style.display = 'block';
+    } else {
+        clothesDetail_container.style.display === 'none'
+    }
+    getSaleInfo();
+    
+});
+
+// get original sale information of clothe
+function getSaleInfo() {
+    loading_container.style.display = 'flex';
+    const form_data = new FormData();
+    const filename = `${myUsername}/${selectedImage.src.split("/").slice(-1)[0]}`;
+    form_data.append('username', searchUsername);
+    form_data.append('filename', filename);
+
+    const request_options = {
+        method:'POST',
+        body:form_data
+    }
+    
+    fetch('/shop/clothes-sale-info-by-filename', request_options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            price_input.value = data.sale_info.price;
+            size_input.value = data.sale_info.size;
+            brand_input.value = data.sale_info.brand;
+            detail_input.value = data.sale_info.owner_description;
+            loading_container.style.display = 'none';
+            
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+
+}
 
 // remove from sale list
 remove_button.addEventListener('click', () => {
@@ -273,17 +302,6 @@ remove_button.addEventListener('click', () => {
         .catch(error => {
             console.error('Fetch error:', error);
         });
-    
-});
-
-// expect to modifying
-modification_button.addEventListener('click', () => {
-    if(clothesDetail_container.style.display === 'none') {
-        clothesDetail_container.style.display = 'block';
-    } else {
-        clothesDetail_container.style.display === 'none'
-    }
-    getSaleInfo();
     
 });
 
@@ -341,15 +359,4 @@ search_button.addEventListener('click', () => {
         username_input.value = '';
     }
     
-});
-
-// page init - get all clothes
-document.addEventListener('DOMContentLoaded', function() {
-    if (localStorage.getItem('search_username') == '') {
-        searchUsername = localStorage.getItem('username');
-    } else {
-        searchUsername = localStorage.getItem('search_username');
-    }
-    searched_username_text.textContent = searchUsername;
-    getSellClothes();
 });
