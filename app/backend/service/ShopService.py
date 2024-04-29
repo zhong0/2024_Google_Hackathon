@@ -78,3 +78,6 @@ class ShopService:
                 category_files[c] = filenames  
 
         return category_files
+
+    def get_all_user_filename(self):
+        return self.shop_dao.get_all_user_filename()

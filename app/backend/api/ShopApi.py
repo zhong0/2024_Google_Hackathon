@@ -83,3 +83,8 @@ def get_file_path_group_by_category(username: str = Form(...)):
         raise HTTPException(status_code=400, detail="Username is required")
     return {"file_path": shop_service.get_file_path_group_by_category(username)}
 
+
+@router.post("/get-all-user-filename")
+def get_all_user_filename():
+    return {"filename": shop_service.get_all_user_filename()}
+

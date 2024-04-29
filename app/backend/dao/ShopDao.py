@@ -191,6 +191,16 @@ class ShopDao:
         results = self.collection.aggregate(pipeline)
         filenames = [result['filename'] for result in results if 'filename' in result]
         return filenames
+    
+    def get_all_user_filename(self):
+        pipeline = [
+            {"$unwind": "$clothes"},  # 展開 clothes 陣列
+            {"$project": {"_id": 0, "filename": "$clothes.filename"}}  # 將 filename 字段提取出來
+        ]
+        results = list(self.collection.aggregate(pipeline))
+        filename = [result['filename'] for result in results if 'filename' in result]
+        return filename
+        
 
   
         
