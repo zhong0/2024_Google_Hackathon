@@ -44,3 +44,37 @@ class ShopService:
                 return True
 
         return False
+
+    def update_sale_info(self, username, filename, brand, size, price, owner_description):
+        clothes_info = self.shop_dao.get_clothes_info_by_filename(filename)
+        sale_info = {
+            "size": size,
+            "brand": brand,
+            "price": price,
+            "owner_description": owner_description
+        }
+
+        if clothes_info:
+            if clothes_info["filename"] == filename:
+                clothes_info["sale_info"] = sale_info
+
+        if clothes_info:
+            return self.shop_dao.clothes_on_sale(username, clothes_info)
+        
+        return False
+
+
+    def get_file_path_group_by_category(self, username):
+        category_files = {}
+
+        categories = self.shop_dao.get_all_distinct_category(username)
+
+        for c in categories:
+            filenames = self.shop_dao.get_filename_by_category(username, c)
+            
+            if c in category_files:
+                category_files[c].extend(filenames)  
+            else:
+                category_files[c] = filenames  
+
+        return category_files

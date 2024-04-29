@@ -162,6 +162,32 @@ class ShopDao:
                 )
 
         return result.acknowledged
+    
+    def get_all_distinct_category(self, username):
+        pipeline = [
+            {"$match": {"username": username}},
+            {"$unwind": "$clothes"},
+            {"$project": {"category": {"$toLower": "$clothes.category"}}},
+            {"$group": {"_id": None, "distinct_categories": {"$addToSet": "$category"}}},
+            {"$project": {"_id": 0, "distinct_categories": 1}}
+        ]
+        results = list(self.collection.aggregate(pipeline))
+        if results:
+            return results[0]['distinct_categories']
+        else:
+            return []
+
+    def get_filename_by_category(self, username, category):
+        pipeline = [
+            {"$match": {"username": username}}, 
+            {"$unwind": "$clothes"}, 
+            {"$match": {"clothes.category": category, "clothes.filename": {"$nin": [None, ""]}}}, 
+            {"$project": {"filename": "$clothes.filename"}}
+        ]
+        
+        results = self.collection.aggregate(pipeline)
+        filenames = [result['filename'] for result in results if 'filename' in result]
+        return filenames
 
   
         

@@ -62,3 +62,24 @@ def remove_clothes_from_shop(username: str = Form(...), filename: str = Form(...
     
     raise HTTPException(status_code=500, detail="Failed to remove from shop")
 
+@router.post("/update-sale-info")
+def clothes_on_sale(request: SaleClothesRequest):
+    if request.username is None:
+        raise HTTPException(status_code=400, detail="Username is required")
+    if request.filename is None:
+        raise HTTPException(status_code=400, detail="Filename is required")
+    if request.price is None: 
+        raise HTTPException(status_code=400, detail="Price is required")
+    
+    if shop_service.update_sale_info(
+        request.username, request.filename, request.brand, request.size, request.price, request.owner_description):
+        return {"message": "update sale of clothes successfully"}
+    
+    raise HTTPException(status_code=500, detail="Failed to sale")
+
+@router.post("/file-path-group-by-category")
+def get_file_path_group_by_category(username: str = Form(...)):
+    if username is None :
+        raise HTTPException(status_code=400, detail="Username is required")
+    return {"file_path": shop_service.get_file_path_group_by_category(username)}
+
