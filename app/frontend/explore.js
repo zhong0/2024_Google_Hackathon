@@ -14,6 +14,8 @@ const explore_input = document.getElementById('explore-input');
 const data = [];
 
 search_button.addEventListener('click',()=>{
+    let style = explore_input.value;
+
     //remove explore container child
     remove_all_child_in_explore_container();
     //remove data
@@ -21,7 +23,7 @@ search_button.addEventListener('click',()=>{
     //clean text input
     explore_input.value = '';
     // fetch api by style user input (even a sentence)
-    let style = explore_input.value;
+    
     fetch_explore_data('chiPi_data', style);
 
 
@@ -129,7 +131,7 @@ function fetch_explore_data(username, style){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     fetch_explore_data('','');
     
 });
