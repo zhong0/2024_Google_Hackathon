@@ -104,6 +104,9 @@ class ShopDao:
             {"$unwind": "$clothes"},
             {"$match": {"clothes.filename": filename}},
             {"$project": {
+                "username": "$username",
+                "name": "$clothes.name",
+                "url": "$clothes.url",
                 "sale_info": "$clothes.sale_info",
                 "_id": 0 
             }}
