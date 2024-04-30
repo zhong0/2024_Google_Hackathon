@@ -12,6 +12,7 @@ const size_input = document.getElementById('size-input');
 const brand_input = document.getElementById('brand-input');
 const details_input = document.getElementById('detail-input');
 const sell_button = document.getElementById('add-to-sell');
+const doublecheck_window_container = document.getElementById('doublecheck-window-container');
 
 let username = '';
 const loading_container = document.getElementById('loading');
@@ -20,6 +21,7 @@ let selectedImage = null;
 let previousSelected = null;
 let options = [];
 let imageListData = [];
+doublecheck_window_container.style.display = 'none';
 
 // page init - get all clothes
 document.addEventListener('DOMContentLoaded', function() {
@@ -151,34 +153,74 @@ clothestype_dropdown.addEventListener("change", function() {
     
 });
 
+function doublcheck_window(fucntion_do){
+    const alertBox = document.createElement('div');
+    alertBox.textContent = 'Delete is forever';
+    alertBox.id = 'doublecheck-window';
+    alertBox.class = 'doublecheck-window';
+
+    const yes_button = document.createElement('img');
+    yes_button.src = '../resource/yes_bt.png';
+    yes_button.style.marginRight = '10px';
+    yes_button.addEventListener('click', function(){
+        doublecheck_window_container.style.display = 'none';
+        fucntion_do();
+        doublecheck_window_container.removeChild(alertBox);
+        console.log('yes');
+    });
+
+
+    const no_button = document.createElement('img');
+    no_button.src = '../resource/no_bt.png';
+    no_button.addEventListener('click', function(){
+        doublecheck_window_container.style.display = 'none';
+        doublecheck_window_container.removeChild(alertBox);
+        console.log('no');
+    });
+
+    alertBox.appendChild(yes_button);
+    alertBox.appendChild(no_button);
+
+    //document.body.appendChild(alertBox);
+    doublecheck_window_container.appendChild(alertBox);
+    
+}
+
+function remove_from_closet(){
+    
+    console.log('in');
+    // const filename = `${username}/${selectedImage.src.split("/").slice(-1)[0]}`;
+    // const form_data = new FormData();
+    
+    // form_data.append('username',username);
+    // form_data.append('filename',filename);
+
+    // const request_options = {
+    //     method:'POST',
+    //     body:form_data
+    // }
+    
+    // fetch('/clothes/remove-clothes-from-wardrobe', request_options)
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         choice_list.style.display = 'none';
+    //         clothesDetail_container.style.display = 'none';
+    //         getAllClothes();
+    //     })
+    //     .catch(error => {
+    //         console.error('Fetch error:', error);
+    //     });
+}
+
 // remove from closet
 delete_button.addEventListener('click', () => {
-    const filename = `${username}/${selectedImage.src.split("/").slice(-1)[0]}`;
-    const form_data = new FormData();
-    
-    form_data.append('username',username);
-    form_data.append('filename',filename);
-
-    const request_options = {
-        method:'POST',
-        body:form_data
-    }
-    
-    fetch('/clothes/remove-clothes-from-wardrobe', request_options)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            choice_list.style.display = 'none';
-            clothesDetail_container.style.display = 'none';
-            getAllClothes();
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-        });
+    doublecheck_window_container.style.display = 'block';
+    doublcheck_window(remove_from_closet);
     
 });
 

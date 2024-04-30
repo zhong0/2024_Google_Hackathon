@@ -798,3 +798,17 @@ select {
     position: absolute;
     top: 240px;
 }
+
+.doublecheck-window-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+}

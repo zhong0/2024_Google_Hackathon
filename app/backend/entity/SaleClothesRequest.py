@@ -6,7 +6,7 @@ class SaleClothesRequest(BaseModel):
     size: str
     brand: str
     owner_description: constr(max_length=100)
-    price: confloat(gt=0)
+    price: confloat()
 
     @field_validator('price')
     def check_price(cls, value):

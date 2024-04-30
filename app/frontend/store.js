@@ -7,6 +7,7 @@ const clothesDetail_container = document.getElementById('add-store-detail');
 const favorite_button =  document.getElementById('favorite-bt');
 const submit_button =  document.getElementById('submit-bt');
 const searched_username_text =  document.getElementById('searched-username-text');
+const doublecheck_window_container = document.getElementById('doublecheck-window-container');
 
 const username_input =  document.getElementById('username-input');
 const search_button =  document.getElementById('search-bt');
@@ -274,8 +275,39 @@ function getSaleInfo() {
 
 }
 
-// remove from sale list
-remove_button.addEventListener('click', () => {
+function doublcheck_window(fucntion_do){
+    const alertBox = document.createElement('div');
+    alertBox.textContent = 'Delete is forever';
+    alertBox.id = 'doublecheck-window';
+    alertBox.class = 'doublecheck-window';
+
+    const yes_button = document.createElement('img');
+    yes_button.src = '../resource/yes_bt.png';
+    yes_button.style.marginRight = '10px';
+    yes_button.addEventListener('click', function(){
+        doublecheck_window_container.style.display = 'none';
+        fucntion_do();
+        console.log('yes');
+    });
+
+
+    const no_button = document.createElement('img');
+    no_button.src = '../resource/no_bt.png';
+    no_button.addEventListener('click', function(){
+        doublecheck_window_container.style.display = 'none';
+        doublecheck_window_container.removeChild(alertBox);
+        console.log('no');
+    });
+
+    alertBox.appendChild(yes_button);
+    alertBox.appendChild(no_button);
+
+    //document.body.appendChild(alertBox);
+    doublecheck_window_container.appendChild(alertBox);
+    
+}
+
+function remove_clothes_from_shop(){
     const filename = `${myUsername}/${selectedImage.src.split("/").slice(-1)[0]}`;
     const form_data = new FormData();
     
@@ -302,6 +334,19 @@ remove_button.addEventListener('click', () => {
         .catch(error => {
             console.error('Fetch error:', error);
         });
+}
+
+// remove from sale list
+remove_button.addEventListener('click', () => {
+    doublecheck_window_container.style.display = 'block';
+    doublcheck_window(remove_clothes_from_shop);
+    // let confirmation = confirm('Are you really want to delete?');
+    // if(confirmation){
+    //     console.log('yes');
+    // } else {
+    //     console.log('no');
+    // }
+    
     
 });
 
