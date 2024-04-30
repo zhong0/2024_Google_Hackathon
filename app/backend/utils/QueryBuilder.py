@@ -24,7 +24,11 @@ def build_recommend_query(clothes, style, occasion, specific_clothes, history_re
     query_parts.append("Recommend the most suitable outfit.")
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
     query_parts.append("{\"recommend_result\": {\"recommend_set\": [\"clothes_file_name_1\", \"clothes_file_name_2\"],\"description\": \"......\",\"style\": [\"style_1\", \"style_2\"]}}")
-    query_parts.append("Recommended outfits must be complete ensembles.")
+    query_parts.append("The recommended outfits must consist of one of the following 3 combinations:")
+    query_parts.append("1. A top and pants and shoes")
+    query_parts.append("2. A top and skirt and shoes")
+    query_parts.append("3. A one-piece outfit such as a gown or dress and shoes")
+    query_parts.append("bags, and accessories can be added to the above combinations based on the occasion and style.")
     query_parts.append("Recommended outfits set must be wearable at the same time.")
     query_parts.append("Descriptions must not mention the filename.")
 
@@ -44,7 +48,7 @@ def build_explore_query(user_clothes, shop_clothes, style, recommend_count):
         query_parts.append(str(style))
 
     query_parts.append("Recommend as more as possible suitable outfits.")
-    query_parts.append("the limitaion of outfits is" + str(recommend_count))
+    query_parts.append("the limitaion of outfits is " + str(recommend_count))
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
     
     recommendations = [
@@ -61,8 +65,12 @@ def build_explore_query(user_clothes, shop_clothes, style, recommend_count):
     ]
 
     query_parts.append(json.dumps({"recommend_results": recommendations}))
+    query_parts.append("The recommended outfits must consist of one of the following 3 combinations:")
+    query_parts.append("1. A top and pants and shoes")
+    query_parts.append("2. A top and skirt and shoes")
+    query_parts.append("3. A one-piece outfit such as a gown or dress and shoes")
+    query_parts.append("bags, and accessories can be added to the above combinations based on the occasion and style.")
     query_parts.append("Recommended outfits set must be wearable at the same time.")
-    query_parts.append("Recommended outfits must be complete ensembles.")
     query_parts.append("Descriptions must not mention the filename.")
 
     query = "\n".join(query_parts)
@@ -84,7 +92,7 @@ def build_explore_pieces_recommend(user_clothes, shop_clothes, style, specific_c
         query_parts.append(str(style))
 
     query_parts.append("Recommend as more as possible suitable clothes outfit for each specific clothes.")
-    query_parts.append("the limitaion of outfits is" + str(recommend_count))
+    query_parts.append("the limitaion of outfits is " + str(recommend_count))
     query_parts.append("Your response should only be in a JSON format string, formatted as follows:")
 
     recommend_results = {

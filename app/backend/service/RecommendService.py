@@ -61,7 +61,7 @@ class RecommendService:
         user_clothes = self.clothes_dao.get_all_clothes_info(username)
 
         # if selected_style is empty ， get style list from user's wardrobe
-        if style :
+        if not style :
             style = self.clothes_dao.get_all_distinct_style(username)
  
         shop_clothes = self.shop_dao.get_all_shop_clothes_info(username)  
@@ -93,7 +93,7 @@ class RecommendService:
             if clothes_info:
                 specific_clothes.append(clothes_info)    
 
-        if style :
+        if not style :
             style = self.clothes_dao.get_all_distinct_style(username)
 
         shop_clothes = self.shop_dao.get_all_shop_clothes_info(username)  
