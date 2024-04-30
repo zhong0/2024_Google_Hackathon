@@ -17,6 +17,7 @@ loading_container.style.display = 'flex';
 const data = [];
 
 search_button.addEventListener('click',()=>{
+    let style = explore_input.value;
     loading_container.style.display = 'flex';
     //remove explore container child
     remove_all_child_in_explore_container();
@@ -25,7 +26,7 @@ search_button.addEventListener('click',()=>{
     //clean text input
     explore_input.value = '';
     // fetch api by style user input (even a sentence)
-    let style = explore_input.value;
+    
     fetch_explore_data('chiPi_data', style);
 
 
