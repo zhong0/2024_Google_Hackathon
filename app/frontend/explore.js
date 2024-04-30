@@ -1,6 +1,9 @@
 const explore_container = document.getElementById('explore-set-container');
 const search_button = document.getElementById('search-bt');
 const explore_input = document.getElementById('explore-input');
+const loading_container = document.getElementById('loading');
+
+loading_container.style.display = 'flex';
 //from API
 // const data = [{
 //     filename: ['zhong0/02.jpg', 'zhong0/04.jpg'],
@@ -14,8 +17,7 @@ const explore_input = document.getElementById('explore-input');
 const data = [];
 
 search_button.addEventListener('click',()=>{
-    let style = explore_input.value;
-
+    loading_container.style.display = 'flex';
     //remove explore container child
     remove_all_child_in_explore_container();
     //remove data
@@ -23,7 +25,7 @@ search_button.addEventListener('click',()=>{
     //clean text input
     explore_input.value = '';
     // fetch api by style user input (even a sentence)
-    
+    let style = explore_input.value;
     fetch_explore_data('chiPi_data', style);
 
 
@@ -127,6 +129,7 @@ function fetch_explore_data(username, style){
             //set toggle button by data 
             console.log(data)
             prepare_data(data);
+            loading_container.style.display = 'none';
         })
         .catch(error => {
             console.error('Fetch error:', error);

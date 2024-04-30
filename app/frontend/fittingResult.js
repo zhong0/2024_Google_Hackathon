@@ -4,6 +4,9 @@ const recommend_container = document.getElementById("recommend-scroll-container-
 const description_text = document.getElementById("description-text");
 const home_button = document.getElementById("home-bt");
 const refresh_button = document.getElementById("refresh-bt");
+const loading_container = document.getElementById('loading');
+
+loading_container.style.display = 'flex';
 
 console.log('styleToggle:', JSON.parse(localStorage.getItem('styleToggleSelected')))
 console.log('occasionToggle:', JSON.parse(localStorage.getItem('occasionToggleSelected')))
@@ -17,8 +20,6 @@ console.log('specific_clothes:', JSON.parse(localStorage.getItem('specific_cloth
 let imageListData = [];
 let description = "This is a casual style."
 let style = [];
-
-
 
 toggleBtn.addEventListener('click', function() {
     console.log(this.checked)
@@ -119,6 +120,7 @@ function remove_all_child_in_scroll_container_wrapper(){
 }
 
 refresh_button.addEventListener('click', ()=>{
+    loading_container.style.display = 'flex';
     console.log('refreshing...')
     //clean imageListData
     imageListData.length = 0;
@@ -190,6 +192,7 @@ function fetch_recommend(isRefresh){
             } else {
                 toggleBtn.checked = true;
             }
+            loading_container.style.display = 'none';
         })
         .catch(error => {
             console.error('Fetch error:', error);
@@ -199,5 +202,6 @@ function fetch_recommend(isRefresh){
 document.addEventListener('DOMContentLoaded', function() {
     
     fetch_recommend(false);
+    loading_container.style.display = 'none';
     
 });

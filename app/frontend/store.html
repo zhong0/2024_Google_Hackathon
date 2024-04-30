@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="../resource/styles.css">
 </head>
 <body>
+    <!-- loading -->
+    <div id="loading" class="loading-container">
+        <div class="loader"></div>
+        <div class="loader-message ">Loading ...</div>
+    </div>
+
     <!-- background -->
     <div class="explore-image-container">
         <img src="../resource/explore_bkg.jpg" alt="explore">
@@ -28,19 +34,21 @@
             <div class="favorite-user-circle">
             <div class="favorite-user-pattern"></div>
         </div>
-        <div class="favorite-user-text">zhong0</div>
+        <div id="searched-username-text" class="favorite-user-text">zhong0</div>
     </div>
 
-     <!-- closet -->
-     <div class="text-explore">
-        <img style = " max-width: 90px; height: auto;" src="../resource/store_word.png" alt="explore">
+    <div class="center-container">
+        <!-- closet -->
+        <div class="text-explore">
+            <img style = " max-width: 90px; height: auto;" src="../resource/store_word.png" alt="explore">
+        </div>
+
+        <select id="clothestype-dropdown" style="width: 320px; margin-top: 50px;">
+            <option value="" selected>Please select an option</option>
+        </select>
+
+        <div id="store-container" class="explore-piece-image-gallery" style="margin-top: 110px;"></div>
     </div>
-
-    <select id="clothestype-dropdown" style="top: 300px; width: 300px;">
-        <option value="" selected>Please select an option</option>
-    </select>
-
-    <div id="store-container" class="explore-piece-image-gallery" style="top: 370px"></div>
 
     <div id="choice-list" class="clothes-chosen-container" style="display: none;">
         <img id = "remove-bt" style="width: 280px;" src="../resource/store_delete_word.png" alt="delete">

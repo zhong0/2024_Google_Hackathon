@@ -5,6 +5,9 @@ const addOccasion_button = document.getElementById('add-occasion-bt');
 const addStyle_input = document.getElementById('style-input');
 const addOccasion_input = document.getElementById('occasion-input');
 const nextPage_button = document.getElementById('next-bt');
+const loading_container = document.getElementById('loading');
+
+loading_container.style.display = 'flex';
 
 // from API
 /*let styleToggle = [
@@ -120,6 +123,7 @@ nextPage_button.addEventListener('click', () => {
                 localStorage.setItem('styleToggleSelected', JSON.stringify(getCheckedToggle(styleToggle)));
                 localStorage.setItem('occasionToggleSelected', JSON.stringify(getCheckedToggle(occasionToggle)));
                 window.location.href = '/fitting_clothes';
+                
             } else {
                 console.error('Error:', response.statusText);
             }
@@ -195,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            loading_container.style.display = 'none';
             return response.json();
         })
         .then(data => {

@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="../resource/styles.css">
 </head>
 <body>
+    <!-- loading -->
+    <div id="loading" class="loading-container">
+        <div class="loader"></div>
+        <div class="loader-message ">Loading ...</div>
+    </div>
+
     <!-- background -->
     <div class="explore-image-container">
         <img src="../resource/explore_bkg.jpg" alt="explore">
@@ -23,7 +29,7 @@
         <p id="price-text" class="piece-title" style="font-size: 22pt;"></p>
         <div class="buy-bt">Buy</div>
         <p class="piece-title">Owner</p>
-        <div class="user-container">
+        <div id="user-bt" class="user-container">
             <img class="user-pic" src="../resource/user_image.png" alt="Your Image">
             <p id="owner-username" class="username"></p>
         </div>

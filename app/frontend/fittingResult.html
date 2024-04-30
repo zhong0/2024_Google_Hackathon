@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" href="../resource/styles.css">
 </head>
 <body>
+    <div id="loading" class="loading-container">
+        <div class="loader"></div>
+        <div class="loader-message">Generating ...</div>
+    </div>
+
     <!-- background -->
     <div class="image-container">
         <img src="../resource/home_bkg.jpg" alt="home">
@@ -17,7 +22,7 @@
     </div>
 
     <!-- ootd -->
-    <div class="text-explore">
+    <div class="text-title-outside-center-container">
         <img style = " max-width: 100px; height: auto;" src="../resource/ootd_word.png" alt="explore">
     </div>
     <div class="home-button">
@@ -25,16 +30,21 @@
     </div>
     <input type="checkbox" id="like-bt" class="like-toggle-btn">
     <label for="like-bt" class="like-toggle-label"></label>
+
     <div class="refresh-button ">
         <img id = "refresh-bt" style = " max-width: 37px; height: auto;" src="../resource/refresh_bt.png" alt="refresh">
     </div>
 
-    <div class="image-scroll-container-wrapper" id="recommend-scroll-container-wrapper" style="top: 340px;"></div>
+    <div class="center-container" style="top: 300px">
+        <div class="image-scroll-container-wrapper" id="recommend-scroll-container-wrapper"></div>
 
-    <div class="text-style" style="top: 575px;">
-        <img style = "max-width: 140px; height: auto;" src="../resource/description_word.png" alt="occasion">
+        <div class="text-style" style="margin-top: 240px">
+            <img style = "max-width: 140px; height: auto;" src="../resource/description_word.png" alt="occasion">
+        </div>
+        <p id="description-text" class="description-text" style="margin-top: 280px"></p>
     </div>
-    <p id="description-text" class="description-text"></p>
+   
+   
     <script src="../frontend/fittingResult.js"></script>
 </body>
 </html>

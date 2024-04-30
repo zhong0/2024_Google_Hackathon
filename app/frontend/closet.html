@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="../resource/styles.css">
 </head>
 <body>
+    <!-- loading -->
+    <div id="loading" class="loading-container">
+        <div class="loader"></div>
+        <div class="loader-message ">Loading ...</div>
+    </div>
+
     <!-- background -->
     <div class="explore-image-container">
         <img src="../resource/home_bkg.jpg" alt="explore">
@@ -27,20 +33,22 @@
             <div class="closet-user-circle">
             <div class="closet-user-pattern"></div>
         </div>
-        <div class="closet-user-text">zhong0</div>
+        <div id="username-text" class="closet-user-text">zhong0</div>
     </div>
 
-     <!-- closet -->
-     <div class="text-explore">
-        <img style = " max-width: 100px; height: auto;" src="../resource/closet_word.png" alt="explore">
+    <div class="center-container">
+        <!-- closet -->
+        <div class="text-explore">
+            <img style = " max-width: 100px; height: auto;" src="../resource/closet_word.png" alt="explore">
+        </div>
+
+        <select id="clothestype-dropdown" style="width: 320px; margin-top: 50px;">
+            <option value="" selected>Please select an option</option>
+        </select>
+
+        <div id="closet_container" class="explore-piece-image-gallery" style="margin-top: 110px;"></div>
+
     </div>
-
-    <select id="clothestype-dropdown" style="top: 300px; width: 280px;">
-        <option value="" selected>Please select an option</option>
-    </select>
-
-    <div id="closet_container" class="explore-piece-image-gallery" style="top: 370px"></div>
-
     <div id="choice-list" class="clothes-chosen-container" style="display: none;">
         <img id = "delete-bt" style="width: 280px;" src="../resource/delete_bt.png" alt="delete">
         <img id = "add-to-store-bt" style="width: 280px;" src="../resource/add_store_bt.png" alt="add">
@@ -56,6 +64,7 @@
             <img id = "add-to-sell" style="width: 280px; margin-top: 10px;" src="../resource/add_sell_bt.png" alt="sell">
         </div>
     </div>
+
 
     <script src="../frontend/closet.js"></script>
 </body>
