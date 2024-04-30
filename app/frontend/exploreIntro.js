@@ -4,6 +4,9 @@ const tag_container =  document.querySelector('.explore-set-tag-row');
 const text_container = document.getElementById('explore-set-description-text');
 const like_bt = document.getElementById('like-bt');
 const like_label = document.getElementById('like-label');
+const loading_container = document.getElementById('loading');
+
+loading_container.style.display = 'flex';
 
 console.log('get from explore',JSON.parse(localStorage.getItem('exploreSelectedSetFilename')),
 JSON.parse(localStorage.getItem('exploreSelectedSetStyle')),
@@ -286,6 +289,7 @@ function fetch_explore_piece_recommend_data(){
           prepare_piece_recommend_data(data);
           pieces_recommend_by = data.recommend_results;
           console.log(pieces_recommend_by);
+          loading_container.style.display = 'none';
       })
       .catch(error => {
           console.error('Fetch error:', error);
