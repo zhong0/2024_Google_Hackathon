@@ -135,6 +135,9 @@ refresh_button.addEventListener('click', ()=>{
 });
 
 function fetch_recommend(isRefresh){
+    //show loading 
+    loading_container.style.display = 'flex';
+
     const payload_data = {
         username: 'chiPi_data',
         style: JSON.parse(localStorage.getItem('styleToggleSelected')),
@@ -151,6 +154,7 @@ function fetch_recommend(isRefresh){
         body:JSON.stringify(payload_data)
     }
 
+    //fetching
     fetch('/recommend/recommend-by-text', request_options)
         .then(response => {
             if (!response.ok) {
@@ -200,8 +204,8 @@ function fetch_recommend(isRefresh){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    
-    fetch_recommend(false);
+
     loading_container.style.display = 'none';
+    fetch_recommend(false);
     
 });
