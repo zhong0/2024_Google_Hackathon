@@ -190,7 +190,11 @@ closet_button.addEventListener('click', () => {
     fetch('/closet', { method: 'GET' })
         .then(response => {
             if (response.ok) {
-                window.location.href = '/closet';
+                if(localStorage.getItem('username')){
+                    window.location.href = '/closet';
+                } else {
+                    window.location.href = '/login';
+                }
             } else {
                 console.error('Error:', response.statusText);
             }
