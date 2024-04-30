@@ -85,6 +85,9 @@ function prepare_data(response_data){
             fetch('/explore_intro', { method: 'GET' })
                 .then(response => {
                     if (response.ok) {
+                        localStorage.setItem('exploreSelectedSetFilename', JSON.stringify(ele.filename));
+                        localStorage.setItem('exploreSelectedSetStyle', JSON.stringify(ele.style));
+                        localStorage.setItem('exploreSelectedSetdescription', JSON.stringify(ele.description));
                         window.location.href = '/explore_intro';
                     } else {
                         console.error('Error:', response.statusText);
@@ -102,7 +105,7 @@ function fetch_explore_data(username, style){
     const payload_data = {
         username:username,
         style:style,
-        recommend_count:2
+        recommend_count:10
     }
 
     const request_options = {

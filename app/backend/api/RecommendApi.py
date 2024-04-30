@@ -43,7 +43,7 @@ def explore_pieces_recommendation(request: ExplorePiecesRequest):
         request.username,
         request.style,
         request.specific_clothes,
-        const.explore_outfit_number
+        request.recommend_count
     )
 
 # @router.post("/create", deprecated=True)
