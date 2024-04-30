@@ -135,12 +135,13 @@ function showMessage(message) {
     alertBox.style.left = '50%';
     alertBox.style.transform = 'translate(-50%, -50%)';
     alertBox.style.zIndex = '9999';
+    alertBox.style.animation = 'fadeOut 3s linear infinite';
 
     document.body.appendChild(alertBox);
 
     setTimeout(function() {
         document.body.removeChild(alertBox);
-    }, 2000); // 2秒后移除提示框
+    }, 3000); // 2秒后移除提示框
 }
 
 
@@ -218,11 +219,11 @@ upload_file_input.addEventListener('change', async() => {
         method: 'POST',
         body: formData
     };
-    
     fetch('/upload/upload-images', requestOptions)
         .then(response => {
             if (response.ok) {
-                window.location.href = '/fitting_style';
+                console.log('show');
+                showMessage('Upload completed');
             } else {
                 console.error('Error:', response.statusText);
             }

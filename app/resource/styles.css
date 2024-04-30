@@ -765,6 +765,21 @@ select {
     100% { transform: rotate(360deg); }
 }
 
+@keyframes fadeOut {
+    0% {
+        opacity: 0;
+    }
+    5%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .center-container {
     top: 230px;
     position: absolute;
