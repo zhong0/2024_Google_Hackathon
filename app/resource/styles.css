@@ -365,8 +365,8 @@ select {
   
 .explore-set-image-gallery img {
     flex: 0 0 auto; /* Allow images to shrink or grow */
-    width: 200px; /* Set image width */
-    height: auto; /* Maintain aspect ratio */
+    width: auto; /* Set image width */
+    height: 200px; /* Maintain aspect ratio */
     margin-right: 10px; /* Add some space between images */
 }
   
@@ -383,6 +383,7 @@ select {
 
 
 .explore-set-tag-row {
+    margin-top: 30px;
   display: flex;
   gap: 15px;
   z-index: 4;
