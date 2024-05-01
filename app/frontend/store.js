@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     myUsername = localStorage.getItem('username');
     search_piece_clothes_filename = localStorage.getItem('search_piece_clothes_filename');
     localStorage.setItem('search_piece_clothes_filename', '');
+    searchUsername = localStorage.getItem('search_username');
     if (searchUsername == '') {
         searchUsername = myUsername;
     } else {
