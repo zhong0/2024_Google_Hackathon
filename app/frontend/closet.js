@@ -188,39 +188,43 @@ function doublcheck_window(fucntion_do){
 
 function remove_from_closet(){
     
-    console.log('in');
-    // const filename = `${username}/${selectedImage.src.split("/").slice(-1)[0]}`;
-    // const form_data = new FormData();
+    console.log('removeing');
+    const filename = `${username}/${selectedImage.src.split("/").slice(-1)[0]}`;
+    const form_data = new FormData();
     
-    // form_data.append('username',username);
-    // form_data.append('filename',filename);
+    form_data.append('username',username);
+    form_data.append('filename',filename);
 
-    // const request_options = {
-    //     method:'POST',
-    //     body:form_data
-    // }
+    const request_options = {
+        method:'POST',
+        body:form_data
+    }
     
-    // fetch('/clothes/remove-clothes-from-wardrobe', request_options)
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error('Network response was not ok');
-    //         }
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         choice_list.style.display = 'none';
-    //         clothesDetail_container.style.display = 'none';
-    //         getAllClothes();
-    //     })
-    //     .catch(error => {
-    //         console.error('Fetch error:', error);
-    //     });
+    fetch('/clothes/remove-clothes-from-wardrobe', request_options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            choice_list.style.display = 'none';
+            clothesDetail_container.style.display = 'none';
+            getAllClothes();
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
 }
 
 // remove from closet
 delete_button.addEventListener('click', () => {
-    doublecheck_window_container.style.display = 'block';
-    doublcheck_window(remove_from_closet);
+    
+    if(doublecheck_window_container.children.length === 0){
+        console.log(doublecheck_window_container.children.length);
+        doublecheck_window_container.style.display = 'block';
+        doublcheck_window(remove_from_closet);
+    }
     
 });
 

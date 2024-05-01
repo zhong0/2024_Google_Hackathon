@@ -339,14 +339,12 @@ function remove_clothes_from_shop(){
 
 // remove from sale list
 remove_button.addEventListener('click', () => {
-    doublecheck_window_container.style.display = 'block';
-    doublcheck_window(remove_clothes_from_shop);
-    // let confirmation = confirm('Are you really want to delete?');
-    // if(confirmation){
-    //     console.log('yes');
-    // } else {
-    //     console.log('no');
-    // }
+
+    if(doublecheck_window_container.children.length === 0){
+        console.log(doublecheck_window_container.children.length);
+        doublecheck_window_container.style.display = 'block';
+        doublcheck_window(remove_clothes_from_shop);
+    }
     
     
 });
