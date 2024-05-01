@@ -56,7 +56,7 @@ toggleBtn.addEventListener('click', function() {
       } else {
         //delete favorite set
         const form_data = new FormData();
-        form_data.append('username', 'chiPi_data');
+        form_data.append('username', localStorage.getItem('username'));
         imageListData.forEach(image_data=>{
             form_data.append('filename_list', image_data.filename);
         });
@@ -82,8 +82,9 @@ toggleBtn.addEventListener('click', function() {
       }
 });
 
-toggleBtn.addEventListener('change', (event)=>{
-    let is_checked = event.target.checked;
+toggleBtn.addEventListener('change', function(){
+    let is_checked = this.checked;
+    console.log('what is ',is_checked);
     if(is_checked){
         toggleLabel.style.backgroundImage = "url('../resource/liked_bt.png')";
     } else {
@@ -120,6 +121,7 @@ function remove_all_child_in_scroll_container_wrapper(){
 }
 
 refresh_button.addEventListener('click', ()=>{
+    const change_event = new Event('change');
     loading_container.style.display = 'flex';
     console.log('refreshing...')
     //clean imageListData
@@ -128,7 +130,8 @@ refresh_button.addEventListener('click', ()=>{
     description_text.textContent = '';
     //reset like-btn
     toggleBtn.checked = false;
-    console.log(toggleBtn.checked)
+    toggleBtn.dispatchEvent(change_event);
+    console.log('it is',toggleBtn.checked);
 
 
     fetch_recommend(true);
