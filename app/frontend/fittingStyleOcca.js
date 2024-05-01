@@ -172,7 +172,7 @@ function loadOccasionToggleData(toggleNames){
 }
 document.addEventListener('DOMContentLoaded', function() {
     const form_data = new FormData();
-    form_data.append('username','chiPi_data');
+    form_data.append('username',localStorage.getItem('username'));
 
     const request_options = {
         method:'POST',

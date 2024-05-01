@@ -35,7 +35,7 @@ like_bt.addEventListener('click', function() {
   if (this.checked) {
       //prepare FormData
       const form_data = new FormData();
-      form_data.append('username', 'chiPi_data');
+      form_data.append('username', localStorage.getItem('username'));
       form_data.append('description', JSON.parse(localStorage.getItem('exploreSelectedSetdescription')));
       JSON.parse(localStorage.getItem('exploreSelectedSetStyle')).forEach(style =>{
           form_data.append('style', style);
@@ -65,7 +65,7 @@ like_bt.addEventListener('click', function() {
     } else {
       //delete favorite set
       const form_data = new FormData();
-      form_data.append('username', 'chiPi_data');
+      form_data.append('username', localStorage.getItem('username'));
       JSON.parse(localStorage.getItem('exploreSelectedSetFilename')).forEach(filename=>{
           form_data.append('filename_list', filename);
       });
@@ -263,7 +263,7 @@ function prepare_piece_recommend_data(response_data){
 
 function fetch_explore_piece_recommend_data(){
   const payload_data = {
-      username:'chiPi_data',
+      username:localStorage.getItem('username'),
       style: JSON.parse(localStorage.getItem('exploreSelectedSetStyle')),
       specific_clothes: JSON.parse(localStorage.getItem('exploreSelectedSetFilename')),
       recommend_count:10

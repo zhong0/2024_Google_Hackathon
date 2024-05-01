@@ -26,7 +26,7 @@ toggleBtn.addEventListener('click', function() {
     if (this.checked) {
         //prepare FormData
         const form_data = new FormData();
-        form_data.append('username', 'chiPi_data');
+        form_data.append('username', localStorage.getItem('username'));
         form_data.append('description', description);
         style.forEach(ele =>{
             form_data.append('style', ele);
@@ -139,7 +139,7 @@ function fetch_recommend(isRefresh){
     loading_container.style.display = 'flex';
 
     const payload_data = {
-        username: 'chiPi_data',
+        username: localStorage.getItem('username'),
         style: JSON.parse(localStorage.getItem('styleToggleSelected')),
         occasion: JSON.parse(localStorage.getItem('occasionToggleSelected')),
         specific_clothes: JSON.parse(localStorage.getItem('specific_clothes')),

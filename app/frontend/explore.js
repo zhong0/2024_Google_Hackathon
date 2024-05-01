@@ -27,7 +27,12 @@ search_button.addEventListener('click',()=>{
     explore_input.value = '';
     // fetch api by style user input (even a sentence)
     
-    fetch_explore_data('chiPi_data', style);
+    if(localStorage.getItem('username')){
+        fetch_explore_data(fetch_explore_data(localStorage.getItem('username'), style));
+    } else {
+        fetch_explore_data('', style);
+    }
+    
 
 
 });
@@ -108,7 +113,7 @@ function fetch_explore_data(username, style){
     const payload_data = {
         username:username,
         style:style,
-        recommend_count:10
+        recommend_count:3
     }
 
     const request_options = {
@@ -139,7 +144,11 @@ function fetch_explore_data(username, style){
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    fetch_explore_data('','');
+    if(localStorage.getItem('username')){
+        fetch_explore_data(localStorage.getItem('username'), '');
+    } else {
+        fetch_explore_data('', '');
+    }
     
 });
 

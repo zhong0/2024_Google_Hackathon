@@ -5,6 +5,7 @@ const piece_container = document.getElementById('homepage-piece-gallery');
 const explore_button = document.querySelector('.explore-button-container');
 const closet_button = document.getElementById('selfclothes-bt');
 const loading_container = document.getElementById('loading');
+const hello_text = document.querySelector('.text-hello');
 
 const myUsername = localStorage.getItem('username');
 let searchUsername = '';
@@ -12,6 +13,13 @@ let searchUsername = '';
 
 // page init - get all clothes
 document.addEventListener('DOMContentLoaded', function() {
+    if(localStorage.getItem('username')){
+        console.log('ins', hello_text);
+        hello_text.textContent = 'Hi '+localStorage.getItem('username');
+    }
+    
+
+
     fetch('/shop/get-all-user-filename', { method: 'POST' })
     .then(response => {
         if (!response.ok) {
@@ -213,7 +221,7 @@ upload_file_input.addEventListener('change', async() => {
         formData.append('files', selectedFiles[i]);
     }
     //username need to be replaced by real data
-    formData.append('username', 'chipi_js');
+    formData.append('username', 'kevin');
     
     const requestOptions = {
         method: 'POST',

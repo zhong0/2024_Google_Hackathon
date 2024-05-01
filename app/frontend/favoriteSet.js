@@ -1,6 +1,7 @@
 const explore_container = document.getElementById('favorite-set-container');
 const search_button = document.getElementById('search-bt');
 const username_input = document.getElementById('username-input');
+const username_text = document.getElementById('username-text');
 //from API
 // const data = [{
 //     filename: ['zhong0/02.jpg', 'zhong0/04.jpg'],
@@ -123,6 +124,9 @@ function fetch_favorite_set_data(username){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
+    if(localStorage.getItem('username')){
+        username_text.textContent = localStorage.getItem('username');
+    }
     //fetch own favorite set
-    fetch_favorite_set_data('chiPi_data');
+    fetch_favorite_set_data(localStorage.getItem('username'));
 });
