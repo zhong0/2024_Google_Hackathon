@@ -383,11 +383,13 @@ select {
 
 
 .explore-set-tag-row {
+    justify-content: left;
+    width: 320px;
     margin-top: 30px;
-  display: flex;
-  gap: 15px;
-  z-index: 4;
-  overflow-x: auto; /* Enable horizontal scrollbar */
+    display: flex;
+    gap: 15px;
+    z-index: 4;
+    overflow-x: auto;
 }
 
 .explore-set-tag {
