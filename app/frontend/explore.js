@@ -28,7 +28,7 @@ search_button.addEventListener('click',()=>{
     // fetch api by style user input (even a sentence)
     
     if(localStorage.getItem('username')){
-        fetch_explore_data(fetch_explore_data(localStorage.getItem('username'), style));
+        fetch_explore_data(localStorage.getItem('username'), style);
     } else {
         fetch_explore_data('', style);
     }
