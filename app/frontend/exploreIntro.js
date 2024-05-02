@@ -190,6 +190,7 @@ data.filename.forEach((ele)=> {
     fetch('/piece_info', { method: 'GET' })
     .then(response => {
         if (response.ok) {
+          localStorage.setItem('search_piece_clothes_filename', ele);
             window.location.href = '/piece_info';
         } else {
             console.error('Error:', response.statusText);
@@ -246,6 +247,7 @@ function prepare_piece_recommend_data(response_data){
       fetch('/piece_info', { method: 'GET' })
       .then(response => {
           if (response.ok) {
+            localStorage.setItem('search_piece_clothes_filename', ele);
               window.location.href = '/piece_info';
           } else {
               console.error('Error:', response.statusText);
