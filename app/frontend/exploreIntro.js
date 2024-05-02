@@ -187,18 +187,7 @@ data.filename.forEach((ele)=> {
   });
 
   img.addEventListener('click', function() {
-    fetch('/piece_info', { method: 'GET' })
-    .then(response => {
-        if (response.ok) {
-          localStorage.setItem('search_piece_clothes_filename', ele);
-            window.location.href = '/piece_info';
-        } else {
-            console.error('Error:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    showPieceInfo(img);
   });
 
   // 將 input、label 和 img 元素添加到 imageWrapper 中
@@ -210,6 +199,94 @@ data.filename.forEach((ele)=> {
   description_container.appendChild(imageWrapper);
 });
 
+function showMessage(message) {
+  const alertBox = document.createElement('div');
+  alertBox.textContent = message;
+  alertBox.style.backgroundColor = '#000000';
+  alertBox.style.color = 'white';
+  alertBox.style.padding = '10px 20px';
+  alertBox.style.borderRadius = '10px';
+  alertBox.style.position = 'fixed';
+  alertBox.style.top = '50%';
+  alertBox.style.left = '50%';
+  alertBox.style.transform = 'translate(-50%, -50%)';
+  alertBox.style.zIndex = '9999';
+  alertBox.style.animation = 'fadeOut 3s linear infinite';
+
+  document.body.appendChild(alertBox);
+
+  setTimeout(function() {
+      document.body.removeChild(alertBox);
+  }, 3000); // 2秒后移除提示框
+}
+
+function showPieceInfo (img) {
+  searchUsername = img.src.split('/').slice(-2)[0];
+  const filename = img.src.split('/').slice(-2).join('/');
+  localStorage.setItem('search_piece_clothes_filename', filename);
+  // if (searchUsername !== localStorage.getItem('username')) {
+      // now is searching a user
+      loading_container.style.display = 'flex';
+      const form_data = new FormData();
+      form_data.append('username', searchUsername);
+      form_data.append('filename', filename);
+
+      const request_options = {
+          method:'POST',
+          body:form_data
+      }
+      
+      fetch('/shop/clothes-sale-info-by-filename', request_options)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              if (data) {
+                  if (data.url) {
+                      // if this clothe is sold by a brand
+                      window.open(data.url, '_blank');
+                      loading_container.style.display = 'none';
+                  } else {
+                      // if this clothe is sold by a user
+                      fetch('/piece_info', { method: 'GET' })
+                      .then(response => {
+                          if (response.ok) {
+                              window.location.href = '/piece_info';
+                          } else {
+                              console.error('Error:', response.statusText);
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error:', error);
+                      });
+                  }
+              } else {
+                loading_container.style.display = 'none';
+                showMessage('This is in your closet');
+              }
+          })
+          .catch(error => {
+              console.error('Fetch error:', error);
+          });
+      
+  // } else {
+  //     //now is user by himself
+  //     fetch('/store', { method: 'GET' })
+  //     .then(response => {
+  //         if (response.ok) {
+  //             window.location.href = '/store';
+  //         } else {
+  //             console.error('Error:', response.statusText);
+  //         }
+  //     })
+  //     .catch(error => {
+  //         console.error('Error:', error);
+  //     });
+  // }
+}
 
 
 function prepare_piece_recommend_data(response_data){
@@ -244,18 +321,7 @@ function prepare_piece_recommend_data(response_data){
     
   
     img.addEventListener('click', function() {
-      fetch('/piece_info', { method: 'GET' })
-      .then(response => {
-          if (response.ok) {
-            localStorage.setItem('search_piece_clothes_filename', ele);
-              window.location.href = '/piece_info';
-          } else {
-              console.error('Error:', response.statusText);
-          }
-      })
-      .catch(error => {
-          console.error('Error:', error);
-      });
+      showPieceInfo(img);
     });
   
     imageWrapper.appendChild(img);
@@ -299,6 +365,12 @@ function fetch_explore_piece_recommend_data(){
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  //should use fetch check whether this set is favorite
+  // if(localStorage.getItem('isFavoriteSet') === true){
+  //   const change_event = new Event('change');
+  //   toggleBtn.checked = false;
+  //   toggleBtn.dispatchEvent(change_event);
+  // }
   //fetch api
   fetch_explore_piece_recommend_data();
 
