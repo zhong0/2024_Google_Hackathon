@@ -221,7 +221,7 @@ upload_file_input.addEventListener('change', async() => {
         formData.append('files', selectedFiles[i]);
     }
     //username need to be replaced by real data
-    formData.append('username', 'kevin');
+    formData.append('username', localStorage.getItem('username'));
     
     const requestOptions = {
         method: 'POST',
