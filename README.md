@@ -45,6 +45,6 @@ We anticipate that OOTDAI can enhance outfit recommendations by incorporating ad
 It's unfortunate that our current display method only showcases outfits piece by piece. To enhance user experience, we're combining it with a 3D outfit visualization model. This feature allows virtual try-ons, reducing time in fitting rooms and minimizing exchanges and returns in e-commerce. OOTDAI aims to empower users to make confident fashion choices and create a more user and environment-friendly shopping process, influencing future fashion trends.
 
 ## Try it out in local
-$ docker build -t {image_name}:{image_version} .
-$ docker run -d -p 8000:8000 -v ./app:/app {image_name}:{image_version} uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+* docker build -t {image_name}:{image_version} .
+* docker run -d -p 8000:8000 -v ./app:/app {image_name}:{image_version} uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
