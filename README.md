@@ -1,4 +1,7 @@
 ## OOTDAI
+## Introduction Video
+https://youtu.be/AWQO_SSA2yg
+
 ## Inspiration
 In the realm of Generative AI, we anticipate valuable outcomes when faced with fragmented information. Throughout the day, the initial encounter with fragmented elements typically arises during the process of selecting attire before heading out. Recent research indicates that women dedicate over 10 minutes each morning to this task. Utilizing a fashion advisor to streamline this decision-making process has the potential to afford individuals more time to enjoy life's journey. Consequently, Gemini, renowned for its strong picture identification capabilities and organizational proficiency, emerges as an ideal candidate to serve as our trusted advisor in recommending the day's outfit. Finally, OOTDAI (Outfit Of The Day with AI), pronounced similarly to "stage" in Chinese, will provide a service that allows users to confidently showcase their personal style on the streets, the stage of our lives.
 
